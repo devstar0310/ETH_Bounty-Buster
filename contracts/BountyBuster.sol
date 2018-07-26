@@ -10,13 +10,11 @@ contract BountyBuster {
 
   mapping(bytes32 => Task) public tasks;
 
-  constructor() public {
-  }
-
   event TaskAdded(bytes32 taskHash);
 
   function addTask(uint _reward, bytes _description)
   public
+  payable
   {
     Task memory newTask = Task({
       poster: msg.sender,
