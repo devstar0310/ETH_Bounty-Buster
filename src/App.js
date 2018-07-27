@@ -17,14 +17,14 @@ class App extends Component {
     return (
       <Web3Provider>
         <BountyBusterProvider>
-          <div className="App">
+          <div className='App'>
             <HeaderContainer />
-              <Router>
-                <div>
-                  <Route exact path='/' component={HomeContainer} />
-                  <Route path='/tasks' component={TasksContainer} />
-                </div>
-              </Router>
+            <Router>
+              <div>
+                <Route exact path='/' component={HomeContainer} />
+                <Route path='/tasks' component={TasksContainer} />
+              </div>
+            </Router>
           </div>
         </BountyBusterProvider>
       </Web3Provider>

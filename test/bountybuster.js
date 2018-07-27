@@ -3,13 +3,11 @@ const watchEvent = require('./helpers/watch-event');
 const Web3Utils = require('web3-utils');
 
 contract('BountyBuster', function(accounts) {
-
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const TASK_ADDED_EVENT = 'TaskAdded';
   const TASK_PROPERTY_TO_INDEX = { poster: 0, hunter: 1, reward: 2, description: 3 };
 
   it('should correctly emit a task added event with a task hash when a task is created', () => {
-
     let bountyBusterInstance;
     let taskReward = 100;
     let taskDescription = 'This is a task description';
@@ -34,5 +32,4 @@ contract('BountyBuster', function(accounts) {
         assert.equal(Web3Utils.hexToUtf8(task[TASK_PROPERTY_TO_INDEX.description]), taskDescription);
       });
   });
-
 });
