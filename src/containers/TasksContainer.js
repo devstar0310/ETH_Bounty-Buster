@@ -11,8 +11,6 @@ import getEvents from '../utils/getEvents';
 import Task from '../utils/Task';
 import './TaskContainer.css';
 
-const PER_PAGE_TASKS = 10;
-
 class TasksContainer extends Component {
   constructor(props) {
     super(props);
@@ -28,7 +26,7 @@ class TasksContainer extends Component {
   }
 
   componentWillMount() {
-    let { bountyBuster, web3 } = this.props;
+    let { bountyBuster } = this.props;
     getEvents(bountyBuster, 'TaskAdded')
       .then((taskAddedEvents) => {
         this.setState({ taskAddedEvents });
