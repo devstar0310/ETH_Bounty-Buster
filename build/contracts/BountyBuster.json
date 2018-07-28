@@ -12,6 +12,10 @@
       "name": "tasks",
       "outputs": [
         {
+          "name": "title",
+          "type": "bytes"
+        },
+        {
           "name": "poster",
           "type": "address"
         },
@@ -26,6 +30,10 @@
         {
           "name": "description",
           "type": "bytes"
+        },
+        {
+          "name": "created_at",
+          "type": "uint256"
         }
       ],
       "payable": false,
@@ -48,6 +56,10 @@
       "constant": false,
       "inputs": [
         {
+          "name": "_title",
+          "type": "bytes"
+        },
+        {
           "name": "_reward",
           "type": "uint256"
         },
@@ -63,20 +75,20 @@
       "type": "function"
     }
   ],
-  "bytecode": "0x608060405234801561001057600080fd5b5061068f806100206000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063757d29c814610051578063e579f500146100b7575b600080fd5b6100b560048036038101908080359060200190929190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506101ce565b005b3480156100c357600080fd5b506100e66004803603810190808035600019169060200190929190505050610461565b604051808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200183815260200180602001828103825283818151815260200191508051906020019080838360005b83811015610190578082015181840152602081019050610175565b50505050905090810190601f1680156101bd5780820380516001836020036101000a031916815260200191505b509550505050505060405180910390f35b6101d6610569565b60006080604051908101604052803373ffffffffffffffffffffffffffffffffffffffff168152602001600073ffffffffffffffffffffffffffffffffffffffff16815260200185815260200184815250915081600001518484604051602001808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166c0100000000000000000000000002815260140183815260200182805190602001908083835b6020831015156102af578051825260208201915060208101905060208303925061028a565b6001836020036101000a03801982511681845116808217855250505050505090500193505050506040516020818303038152906040526040518082805190602001908083835b60208310151561031a57805182526020820191506020810190506020830392506102f5565b6001836020036101000a0380198251168184511680821785525050505050509050019150506040518091039020905081600080836000191660001916815260200190815260200160002060008201518160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060208201518160010160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506040820151816002015560608201518160030190805190602001906104189291906105be565b509050507f122220e26ff6b35f7aa4be1a923e48475590096ef91d209c606e85b3b54d893c8160405180826000191660001916815260200191505060405180910390a150505050565b60006020528060005260406000206000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690806002015490806003018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561055f5780601f106105345761010080835404028352916020019161055f565b820191906000526020600020905b81548152906001019060200180831161054257829003601f168201915b5050505050905084565b608060405190810160405280600073ffffffffffffffffffffffffffffffffffffffff168152602001600073ffffffffffffffffffffffffffffffffffffffff16815260200160008152602001606081525090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106105ff57805160ff191683800117855561062d565b8280016001018555821561062d579182015b8281111561062c578251825591602001919060010190610611565b5b50905061063a919061063e565b5090565b61066091905b8082111561065c576000816000905550600101610644565b5090565b905600a165627a7a72305820721c537f0506c9bf6f2dcc70d091caeede848aa868457b125ed00fce40b2f7980029",
-  "deployedBytecode": "0x60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff168063757d29c814610051578063e579f500146100b7575b600080fd5b6100b560048036038101908080359060200190929190803590602001908201803590602001908080601f01602080910402602001604051908101604052809392919081815260200183838082843782019150505050505091929192905050506101ce565b005b3480156100c357600080fd5b506100e66004803603810190808035600019169060200190929190505050610461565b604051808573ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200183815260200180602001828103825283818151815260200191508051906020019080838360005b83811015610190578082015181840152602081019050610175565b50505050905090810190601f1680156101bd5780820380516001836020036101000a031916815260200191505b509550505050505060405180910390f35b6101d6610569565b60006080604051908101604052803373ffffffffffffffffffffffffffffffffffffffff168152602001600073ffffffffffffffffffffffffffffffffffffffff16815260200185815260200184815250915081600001518484604051602001808473ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166c0100000000000000000000000002815260140183815260200182805190602001908083835b6020831015156102af578051825260208201915060208101905060208303925061028a565b6001836020036101000a03801982511681845116808217855250505050505090500193505050506040516020818303038152906040526040518082805190602001908083835b60208310151561031a57805182526020820191506020810190506020830392506102f5565b6001836020036101000a0380198251168184511680821785525050505050509050019150506040518091039020905081600080836000191660001916815260200190815260200160002060008201518160000160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060208201518160010160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff1602179055506040820151816002015560608201518160030190805190602001906104189291906105be565b509050507f122220e26ff6b35f7aa4be1a923e48475590096ef91d209c606e85b3b54d893c8160405180826000191660001916815260200191505060405180910390a150505050565b60006020528060005260406000206000915090508060000160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690806002015490806003018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561055f5780601f106105345761010080835404028352916020019161055f565b820191906000526020600020905b81548152906001019060200180831161054257829003601f168201915b5050505050905084565b608060405190810160405280600073ffffffffffffffffffffffffffffffffffffffff168152602001600073ffffffffffffffffffffffffffffffffffffffff16815260200160008152602001606081525090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f106105ff57805160ff191683800117855561062d565b8280016001018555821561062d579182015b8281111561062c578251825591602001919060010190610611565b5b50905061063a919061063e565b5090565b61066091905b8082111561065c576000816000905550600101610644565b5090565b905600a165627a7a72305820721c537f0506c9bf6f2dcc70d091caeede848aa868457b125ed00fce40b2f7980029",
-  "sourceMap": "26:577:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:577:0;;;;;;;",
-  "deployedSourceMap": "26:577:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;233:368;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;153:37;;8:9:-1;5:2;;;30:1;27;20:12;5:2;153:37:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;153:37:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;233:368;311:19;;:::i;:::-;450:16;333:111;;;;;;;;;354:10;333:111;;;;;;380:1;333:111;;;;;;397:7;333:111;;;;425:12;333:111;;;311:133;;496:7;:14;;;512:7;521:12;479:55;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;479:55:0;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;479:55:0;;;469:66;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;469:66:0;;;;;;;;;;;;;;;;450:85;;559:7;541:5;:15;547:8;541:15;;;;;;;;;;;;;;;;;:25;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;577:19;587:8;577:19;;;;;;;;;;;;;;;;;;;;;;;;233:368;;;;:::o;153:37::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;26:577::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
-  "source": "pragma solidity ^0.4.18;\n\ncontract BountyBuster {\n  struct Task {\n    address poster;\n    address hunter;\n    uint reward;\n    bytes description;\n  }\n\n  mapping(bytes32 => Task) public tasks;\n\n  event TaskAdded(bytes32 taskHash);\n\n  function addTask(uint _reward, bytes _description)\n  public\n  payable\n  {\n    Task memory newTask = Task({\n      poster: msg.sender,\n      hunter: 0,\n      reward: _reward,\n      description: _description\n    });\n    bytes32 taskHash = keccak256(abi.encodePacked(newTask.poster, _reward, _description));\n    tasks[taskHash] = newTask;\n    emit TaskAdded(taskHash);\n  }\n}\n",
+  "bytecode": "0x608060405234801561001057600080fd5b50610891806100206000396000f30060806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680633e04a69014610051578063e579f500146100fd575b600080fd5b6100fb600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929080359060200190929190803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509192919290505050610287565b005b34801561010957600080fd5b5061012c60048036038101908080356000191690602001909291905050506105b1565b60405180806020018773ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200185815260200180602001848152602001838103835289818151815260200191508051906020019080838360005b838110156101e05780820151818401526020810190506101c5565b50505050905090810190601f16801561020d5780820380516001836020036101000a031916815260200191505b50838103825285818151815260200191508051906020019080838360005b8381101561024657808201518184015260208101905061022b565b50505050905090810190601f1680156102735780820380516001836020036101000a031916815260200191505b509850505050505050505060405180910390f35b600061029161075d565b600042925060c0604051908101604052808781526020013373ffffffffffffffffffffffffffffffffffffffff168152602001600073ffffffffffffffffffffffffffffffffffffffff168152602001868152602001858152602001848152509150816020015186868686604051602001808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166c0100000000000000000000000002815260140185805190602001908083835b6020831015156103755780518252602082019150602081019050602083039250610350565b6001836020036101000a03801982511681845116808217855250505050505090500184815260200183805190602001908083835b6020831015156103ce57805182526020820191506020810190506020830392506103a9565b6001836020036101000a038019825116818451168082178552505050505050905001828152602001955050505050506040516020818303038152906040526040518082805190602001908083835b602083101515610441578051825260208201915060208101905060208303925061041c565b6001836020036101000a0380198251168184511680821785525050505050509050019150506040518091039020905081600080836000191660001916815260200190815260200160002060008201518160000190805190602001906104a79291906107c0565b5060208201518160010160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060408201518160020160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060608201518160030155608082015181600401908051906020019061055c9291906107c0565b5060a082015181600501559050507f122220e26ff6b35f7aa4be1a923e48475590096ef91d209c606e85b3b54d893c8160405180826000191660001916815260200191505060405180910390a1505050505050565b6000602052806000526040600020600091509050806000018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561065d5780601f106106325761010080835404028352916020019161065d565b820191906000526020600020905b81548152906001019060200180831161064057829003601f168201915b5050505050908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690806003015490806004018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561074d5780601f106107225761010080835404028352916020019161074d565b820191906000526020600020905b81548152906001019060200180831161073057829003601f168201915b5050505050908060050154905086565b60c06040519081016040528060608152602001600073ffffffffffffffffffffffffffffffffffffffff168152602001600073ffffffffffffffffffffffffffffffffffffffff1681526020016000815260200160608152602001600081525090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061080157805160ff191683800117855561082f565b8280016001018555821561082f579182015b8281111561082e578251825591602001919060010190610813565b5b50905061083c9190610840565b5090565b61086291905b8082111561085e576000816000905550600101610846565b5090565b905600a165627a7a723058209d2a75bfd7b21451aedc52872438784ddcc2f9e5dc27dc9751d87ad4335af3270029",
+  "deployedBytecode": "0x60806040526004361061004c576000357c0100000000000000000000000000000000000000000000000000000000900463ffffffff1680633e04a69014610051578063e579f500146100fd575b600080fd5b6100fb600480360381019080803590602001908201803590602001908080601f016020809104026020016040519081016040528093929190818152602001838380828437820191505050505050919291929080359060200190929190803590602001908201803590602001908080601f0160208091040260200160405190810160405280939291908181526020018383808284378201915050505050509192919290505050610287565b005b34801561010957600080fd5b5061012c60048036038101908080356000191690602001909291905050506105b1565b60405180806020018773ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff1681526020018673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff16815260200185815260200180602001848152602001838103835289818151815260200191508051906020019080838360005b838110156101e05780820151818401526020810190506101c5565b50505050905090810190601f16801561020d5780820380516001836020036101000a031916815260200191505b50838103825285818151815260200191508051906020019080838360005b8381101561024657808201518184015260208101905061022b565b50505050905090810190601f1680156102735780820380516001836020036101000a031916815260200191505b509850505050505050505060405180910390f35b600061029161075d565b600042925060c0604051908101604052808781526020013373ffffffffffffffffffffffffffffffffffffffff168152602001600073ffffffffffffffffffffffffffffffffffffffff168152602001868152602001858152602001848152509150816020015186868686604051602001808673ffffffffffffffffffffffffffffffffffffffff1673ffffffffffffffffffffffffffffffffffffffff166c0100000000000000000000000002815260140185805190602001908083835b6020831015156103755780518252602082019150602081019050602083039250610350565b6001836020036101000a03801982511681845116808217855250505050505090500184815260200183805190602001908083835b6020831015156103ce57805182526020820191506020810190506020830392506103a9565b6001836020036101000a038019825116818451168082178552505050505050905001828152602001955050505050506040516020818303038152906040526040518082805190602001908083835b602083101515610441578051825260208201915060208101905060208303925061041c565b6001836020036101000a0380198251168184511680821785525050505050509050019150506040518091039020905081600080836000191660001916815260200190815260200160002060008201518160000190805190602001906104a79291906107c0565b5060208201518160010160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060408201518160020160006101000a81548173ffffffffffffffffffffffffffffffffffffffff021916908373ffffffffffffffffffffffffffffffffffffffff16021790555060608201518160030155608082015181600401908051906020019061055c9291906107c0565b5060a082015181600501559050507f122220e26ff6b35f7aa4be1a923e48475590096ef91d209c606e85b3b54d893c8160405180826000191660001916815260200191505060405180910390a1505050505050565b6000602052806000526040600020600091509050806000018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561065d5780601f106106325761010080835404028352916020019161065d565b820191906000526020600020905b81548152906001019060200180831161064057829003601f168201915b5050505050908060010160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff16908060020160009054906101000a900473ffffffffffffffffffffffffffffffffffffffff1690806003015490806004018054600181600116156101000203166002900480601f01602080910402602001604051908101604052809291908181526020018280546001816001161561010002031660029004801561074d5780601f106107225761010080835404028352916020019161074d565b820191906000526020600020905b81548152906001019060200180831161073057829003601f168201915b5050505050908060050154905086565b60c06040519081016040528060608152602001600073ffffffffffffffffffffffffffffffffffffffff168152602001600073ffffffffffffffffffffffffffffffffffffffff1681526020016000815260200160608152602001600081525090565b828054600181600116156101000203166002900490600052602060002090601f016020900481019282601f1061080157805160ff191683800117855561082f565b8280016001018555821561082f579182015b8281111561082e578251825591602001919060010190610813565b5b50905061083c9190610840565b5090565b61086291905b8082111561085e576000816000905550600101610846565b5090565b905600a165627a7a723058209d2a75bfd7b21451aedc52872438784ddcc2f9e5dc27dc9751d87ad4335af3270029",
+  "sourceMap": "26:739:0:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;26:739:0;;;;;;;",
+  "deployedSourceMap": "26:739:0:-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;271:492;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;191:37;;8:9:-1;5:2;;;30:1;27;20:12;5:2;191:37:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;191:37:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;23:1:-1;8:100;33:3;30:1;27:10;8:100;;;99:1;94:3;90:11;84:18;80:1;75:3;71:11;64:39;52:2;49:1;45:10;40:15;;8:100;;;12:14;191:37:0;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;271:492;363:15;402:19;;:::i;:::-;592:16;381:15;363:33;;424:162;;;;;;;;;487:6;424:162;;;;445:10;424:162;;;;;;471:1;424:162;;;;;;509:7;424:162;;;;537:12;424:162;;;;569:10;424:162;;;402:184;;638:7;:14;;;654:6;662:7;671:12;685:10;621:75;;;;;;;;;;;;;;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;621:75:0;;;;;;;;;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;621:75:0;;;;;;;;;;;;;;;;;;;;49:4:-1;39:7;30;26:21;22:32;13:7;6:49;621:75:0;;;611:86;;;;;;;;;;;;;36:153:-1;66:2;61:3;58:11;51:19;36:153;;;182:3;176:10;171:3;164:23;98:2;93:3;89:12;82:19;;123:2;118:3;114:12;107:19;;148:2;143:3;139:12;132:19;;36:153;;;274:1;267:3;263:2;259:12;254:3;250:22;246:30;315:4;311:9;305:3;299:10;295:26;356:4;350:3;344:10;340:21;389:7;380;377:20;372:3;365:33;3:399;;;611:86:0;;;;;;;;;;;;;;;;592:105;;721:7;703:5;:15;709:8;703:15;;;;;;;;;;;;;;;;;:25;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;;;;;;;;;;;739:19;749:8;739:19;;;;;;;;;;;;;;;;;;;;;;;;271:492;;;;;;:::o;191:37::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;26:739::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;:::i;:::-;;;:::o;:::-;;;;;;;;;;;;;;;;;;;;;;;;;;;:::o",
+  "source": "pragma solidity ^0.4.18;\n\ncontract BountyBuster {\n  struct Task {\n    bytes title;\n    address poster;\n    address hunter;\n    uint reward;\n    bytes description;\n    uint created_at;\n  }\n\n  mapping(bytes32 => Task) public tasks;\n\n  event TaskAdded(bytes32 taskHash);\n\n  function addTask(bytes _title, uint _reward, bytes _description)\n  public\n  payable\n  {\n    uint _createdAt = block.timestamp;\n    Task memory newTask = Task({\n      poster: msg.sender,\n      hunter: 0,\n      title: _title,\n      reward: _reward,\n      description: _description,\n      created_at: _createdAt\n    });\n    bytes32 taskHash = keccak256(abi.encodePacked(newTask.poster, _title, _reward, _description, _createdAt));\n    tasks[taskHash] = newTask;\n    emit TaskAdded(taskHash);\n  }\n}\n",
   "sourcePath": "/Users/jemilezzet/development/consensys/bounty_buster/contracts/BountyBuster.sol",
   "ast": {
     "absolutePath": "/Users/jemilezzet/development/consensys/bounty_buster/contracts/BountyBuster.sol",
     "exportedSymbols": {
       "BountyBuster": [
-        59
+        74
       ]
     },
-    "id": 60,
+    "id": 75,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -96,38 +108,38 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 59,
+        "id": 74,
         "linearizedBaseContracts": [
-          59
+          74
         ],
         "name": "BountyBuster",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "BountyBuster.Task",
-            "id": 10,
+            "id": 14,
             "members": [
               {
                 "constant": false,
                 "id": 3,
-                "name": "poster",
+                "name": "title",
                 "nodeType": "VariableDeclaration",
-                "scope": 10,
-                "src": "70:14:0",
+                "scope": 14,
+                "src": "70:11:0",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_address",
-                  "typeString": "address"
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
                 },
                 "typeName": {
                   "id": 2,
-                  "name": "address",
+                  "name": "bytes",
                   "nodeType": "ElementaryTypeName",
-                  "src": "70:7:0",
+                  "src": "70:5:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
                   }
                 },
                 "value": null,
@@ -136,10 +148,10 @@
               {
                 "constant": false,
                 "id": 5,
-                "name": "hunter",
+                "name": "poster",
                 "nodeType": "VariableDeclaration",
-                "scope": 10,
-                "src": "90:14:0",
+                "scope": 14,
+                "src": "87:14:0",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -150,7 +162,7 @@
                   "id": 4,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
-                  "src": "90:7:0",
+                  "src": "87:7:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
                     "typeString": "address"
@@ -162,10 +174,36 @@
               {
                 "constant": false,
                 "id": 7,
+                "name": "hunter",
+                "nodeType": "VariableDeclaration",
+                "scope": 14,
+                "src": "107:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 6,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "107:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 9,
                 "name": "reward",
                 "nodeType": "VariableDeclaration",
-                "scope": 10,
-                "src": "110:11:0",
+                "scope": 14,
+                "src": "127:11:0",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -173,10 +211,10 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 6,
+                  "id": 8,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
-                  "src": "110:4:0",
+                  "src": "127:4:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -187,11 +225,11 @@
               },
               {
                 "constant": false,
-                "id": 9,
+                "id": 11,
                 "name": "description",
                 "nodeType": "VariableDeclaration",
-                "scope": 10,
-                "src": "127:17:0",
+                "scope": 14,
+                "src": "144:17:0",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -199,13 +237,39 @@
                   "typeString": "bytes"
                 },
                 "typeName": {
-                  "id": 8,
+                  "id": 10,
                   "name": "bytes",
                   "nodeType": "ElementaryTypeName",
-                  "src": "127:5:0",
+                  "src": "144:5:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes_storage_ptr",
                     "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13,
+                "name": "created_at",
+                "nodeType": "VariableDeclaration",
+                "scope": 14,
+                "src": "167:15:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "167:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   }
                 },
                 "value": null,
@@ -214,50 +278,50 @@
             ],
             "name": "Task",
             "nodeType": "StructDefinition",
-            "scope": 59,
-            "src": "52:97:0",
+            "scope": 74,
+            "src": "52:135:0",
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 14,
+            "id": 18,
             "name": "tasks",
             "nodeType": "VariableDeclaration",
-            "scope": 59,
-            "src": "153:37:0",
+            "scope": 74,
+            "src": "191:37:0",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$10_storage_$",
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$14_storage_$",
               "typeString": "mapping(bytes32 => struct BountyBuster.Task)"
             },
             "typeName": {
-              "id": 13,
+              "id": 17,
               "keyType": {
-                "id": 11,
+                "id": 15,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
-                "src": "161:7:0",
+                "src": "199:7:0",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bytes32",
                   "typeString": "bytes32"
                 }
               },
               "nodeType": "Mapping",
-              "src": "153:24:0",
+              "src": "191:24:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$10_storage_$",
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$14_storage_$",
                 "typeString": "mapping(bytes32 => struct BountyBuster.Task)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 12,
+                "id": 16,
                 "name": "Task",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 10,
-                "src": "172:4:0",
+                "referencedDeclaration": 14,
+                "src": "210:4:0",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Task_$10_storage_ptr",
+                  "typeIdentifier": "t_struct$_Task_$14_storage_ptr",
                   "typeString": "struct BountyBuster.Task"
                 }
               }
@@ -268,21 +332,21 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 18,
+            "id": 22,
             "name": "TaskAdded",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 17,
+              "id": 21,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 16,
+                  "id": 20,
                   "indexed": false,
                   "name": "taskHash",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18,
-                  "src": "211:16:0",
+                  "scope": 22,
+                  "src": "249:16:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -290,10 +354,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 15,
+                    "id": 19,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "211:7:0",
+                    "src": "249:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -303,43 +367,108 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "210:18:0"
+              "src": "248:18:0"
             },
-            "src": "195:34:0"
+            "src": "233:34:0"
           },
           {
             "body": {
-              "id": 57,
+              "id": 72,
               "nodeType": "Block",
-              "src": "305:296:0",
+              "src": "357:406:0",
               "statements": [
                 {
                   "assignments": [
-                    26
+                    32
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 26,
+                      "id": 32,
+                      "name": "_createdAt",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 73,
+                      "src": "363:15:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 31,
+                        "name": "uint",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "363:4:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 35,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 33,
+                      "name": "block",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 79,
+                      "src": "381:5:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_block",
+                        "typeString": "block"
+                      }
+                    },
+                    "id": 34,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "timestamp",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "381:15:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "363:33:0"
+                },
+                {
+                  "assignments": [
+                    37
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 37,
                       "name": "newTask",
                       "nodeType": "VariableDeclaration",
-                      "scope": 58,
-                      "src": "311:19:0",
+                      "scope": 73,
+                      "src": "402:19:0",
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Task_$10_memory_ptr",
+                        "typeIdentifier": "t_struct$_Task_$14_memory_ptr",
                         "typeString": "struct BountyBuster.Task"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 25,
+                        "id": 36,
                         "name": "Task",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 10,
-                        "src": "311:4:0",
+                        "referencedDeclaration": 14,
+                        "src": "402:4:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Task_$10_storage_ptr",
+                          "typeIdentifier": "t_struct$_Task_$14_storage_ptr",
                           "typeString": "struct BountyBuster.Task"
                         }
                       },
@@ -347,7 +476,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 34,
+                  "id": 47,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
@@ -355,18 +484,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 28,
+                          "id": 39,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 74,
-                          "src": "354:3:0",
+                          "referencedDeclaration": 89,
+                          "src": "445:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 29,
+                        "id": 40,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -374,7 +503,7 @@
                         "memberName": "sender",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": null,
-                        "src": "354:10:0",
+                        "src": "445:10:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -383,14 +512,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "30",
-                        "id": 30,
+                        "id": 41,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "number",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "380:1:0",
+                        "src": "471:1:0",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_rational_0_by_1",
@@ -400,12 +529,25 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 31,
+                        "id": 42,
+                        "name": "_title",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 24,
+                        "src": "487:6:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 43,
                         "name": "_reward",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 20,
-                        "src": "397:7:0",
+                        "referencedDeclaration": 26,
+                        "src": "509:7:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -413,32 +555,45 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 32,
+                        "id": 44,
                         "name": "_description",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 22,
-                        "src": "425:12:0",
+                        "referencedDeclaration": 28,
+                        "src": "537:12:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
                           "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 45,
+                        "name": "_createdAt",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 32,
+                        "src": "569:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       }
                     ],
                     "expression": {
                       "argumentTypes": null,
-                      "id": 27,
+                      "id": 38,
                       "name": "Task",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 10,
-                      "src": "333:4:0",
+                      "referencedDeclaration": 14,
+                      "src": "424:4:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_struct$_Task_$10_storage_ptr_$",
+                        "typeIdentifier": "t_type$_t_struct$_Task_$14_storage_ptr_$",
                         "typeString": "type(struct BountyBuster.Task storage pointer)"
                       }
                     },
-                    "id": 33,
+                    "id": 46,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -447,31 +602,33 @@
                     "names": [
                       "poster",
                       "hunter",
+                      "title",
                       "reward",
-                      "description"
+                      "description",
+                      "created_at"
                     ],
                     "nodeType": "FunctionCall",
-                    "src": "333:111:0",
+                    "src": "424:162:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Task_$10_memory",
+                      "typeIdentifier": "t_struct$_Task_$14_memory",
                       "typeString": "struct BountyBuster.Task memory"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "311:133:0"
+                  "src": "402:184:0"
                 },
                 {
                   "assignments": [
-                    36
+                    49
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 36,
+                      "id": 49,
                       "name": "taskHash",
                       "nodeType": "VariableDeclaration",
-                      "scope": 58,
-                      "src": "450:16:0",
+                      "scope": 73,
+                      "src": "592:16:0",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -479,10 +636,10 @@
                         "typeString": "bytes32"
                       },
                       "typeName": {
-                        "id": 35,
+                        "id": 48,
                         "name": "bytes32",
                         "nodeType": "ElementaryTypeName",
-                        "src": "450:7:0",
+                        "src": "592:7:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -492,7 +649,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 46,
+                  "id": 61,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
@@ -503,26 +660,26 @@
                             "argumentTypes": null,
                             "expression": {
                               "argumentTypes": null,
-                              "id": 40,
+                              "id": 53,
                               "name": "newTask",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 26,
-                              "src": "496:7:0",
+                              "referencedDeclaration": 37,
+                              "src": "638:7:0",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_Task_$10_memory_ptr",
+                                "typeIdentifier": "t_struct$_Task_$14_memory_ptr",
                                 "typeString": "struct BountyBuster.Task memory"
                               }
                             },
-                            "id": 41,
+                            "id": 54,
                             "isConstant": false,
                             "isLValue": true,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "poster",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 3,
-                            "src": "496:14:0",
+                            "referencedDeclaration": 5,
+                            "src": "638:14:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
                               "typeString": "address"
@@ -530,12 +687,25 @@
                           },
                           {
                             "argumentTypes": null,
-                            "id": 42,
+                            "id": 55,
+                            "name": "_title",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 24,
+                            "src": "654:6:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 56,
                             "name": "_reward",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 20,
-                            "src": "512:7:0",
+                            "referencedDeclaration": 26,
+                            "src": "662:7:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -543,15 +713,28 @@
                           },
                           {
                             "argumentTypes": null,
-                            "id": 43,
+                            "id": 57,
                             "name": "_description",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 22,
-                            "src": "521:12:0",
+                            "referencedDeclaration": 28,
+                            "src": "671:12:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes_memory_ptr",
                               "typeString": "bytes memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 58,
+                            "name": "_createdAt",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 32,
+                            "src": "685:10:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
                             }
                           }
                         ],
@@ -562,28 +745,36 @@
                               "typeString": "address"
                             },
                             {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            },
+                            {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
                             },
                             {
                               "typeIdentifier": "t_bytes_memory_ptr",
                               "typeString": "bytes memory"
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
                             }
                           ],
                           "expression": {
                             "argumentTypes": null,
-                            "id": 38,
+                            "id": 51,
                             "name": "abi",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 61,
-                            "src": "479:3:0",
+                            "referencedDeclaration": 76,
+                            "src": "621:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_abi",
                               "typeString": "abi"
                             }
                           },
-                          "id": 39,
+                          "id": 52,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -591,13 +782,13 @@
                           "memberName": "encodePacked",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "479:16:0",
+                          "src": "621:16:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
                             "typeString": "function () pure returns (bytes memory)"
                           }
                         },
-                        "id": 44,
+                        "id": 59,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -605,7 +796,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "479:55:0",
+                        "src": "621:75:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
                           "typeString": "bytes memory"
@@ -619,18 +810,18 @@
                           "typeString": "bytes memory"
                         }
                       ],
-                      "id": 37,
+                      "id": 50,
                       "name": "keccak256",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 68,
-                      "src": "469:9:0",
+                      "referencedDeclaration": 83,
+                      "src": "611:9:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_sha3_pure$__$returns$_t_bytes32_$",
                         "typeString": "function () pure returns (bytes32)"
                       }
                     },
-                    "id": 45,
+                    "id": 60,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -638,19 +829,19 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "469:66:0",
+                    "src": "611:86:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "450:85:0"
+                  "src": "592:105:0"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 51,
+                    "id": 66,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -659,26 +850,26 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 47,
+                        "id": 62,
                         "name": "tasks",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 14,
-                        "src": "541:5:0",
+                        "referencedDeclaration": 18,
+                        "src": "703:5:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$10_storage_$",
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$14_storage_$",
                           "typeString": "mapping(bytes32 => struct BountyBuster.Task storage ref)"
                         }
                       },
-                      "id": 49,
+                      "id": 64,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 48,
+                        "id": 63,
                         "name": "taskHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 36,
-                        "src": "547:8:0",
+                        "referencedDeclaration": 49,
+                        "src": "709:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -689,9 +880,9 @@
                       "isPure": false,
                       "lValueRequested": true,
                       "nodeType": "IndexAccess",
-                      "src": "541:15:0",
+                      "src": "703:15:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Task_$10_storage",
+                        "typeIdentifier": "t_struct$_Task_$14_storage",
                         "typeString": "struct BountyBuster.Task storage ref"
                       }
                     },
@@ -699,26 +890,26 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 50,
+                      "id": 65,
                       "name": "newTask",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 26,
-                      "src": "559:7:0",
+                      "referencedDeclaration": 37,
+                      "src": "721:7:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Task_$10_memory_ptr",
+                        "typeIdentifier": "t_struct$_Task_$14_memory_ptr",
                         "typeString": "struct BountyBuster.Task memory"
                       }
                     },
-                    "src": "541:25:0",
+                    "src": "703:25:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Task_$10_storage",
+                      "typeIdentifier": "t_struct$_Task_$14_storage",
                       "typeString": "struct BountyBuster.Task storage ref"
                     }
                   },
-                  "id": 52,
+                  "id": 67,
                   "nodeType": "ExpressionStatement",
-                  "src": "541:25:0"
+                  "src": "703:25:0"
                 },
                 {
                   "eventCall": {
@@ -726,12 +917,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 54,
+                        "id": 69,
                         "name": "taskHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 36,
-                        "src": "587:8:0",
+                        "referencedDeclaration": 49,
+                        "src": "749:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -745,18 +936,18 @@
                           "typeString": "bytes32"
                         }
                       ],
-                      "id": 53,
+                      "id": 68,
                       "name": "TaskAdded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 18,
-                      "src": "577:9:0",
+                      "referencedDeclaration": 22,
+                      "src": "739:9:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_bytes32_$returns$__$",
                         "typeString": "function (bytes32)"
                       }
                     },
-                    "id": 55,
+                    "id": 70,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -764,20 +955,20 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "577:19:0",
+                    "src": "739:19:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 56,
+                  "id": 71,
                   "nodeType": "EmitStatement",
-                  "src": "572:24:0"
+                  "src": "734:24:0"
                 }
               ]
             },
             "documentation": null,
-            "id": 58,
+            "id": 73,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -785,16 +976,42 @@
             "name": "addTask",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 23,
+              "id": 29,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 20,
+                  "id": 24,
+                  "name": "_title",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 73,
+                  "src": "288:12:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 23,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "288:5:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 26,
                   "name": "_reward",
                   "nodeType": "VariableDeclaration",
-                  "scope": 58,
-                  "src": "250:12:0",
+                  "scope": 73,
+                  "src": "302:12:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -802,10 +1019,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 19,
+                    "id": 25,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "250:4:0",
+                    "src": "302:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -816,11 +1033,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 22,
+                  "id": 28,
                   "name": "_description",
                   "nodeType": "VariableDeclaration",
-                  "scope": 58,
-                  "src": "264:18:0",
+                  "scope": 73,
+                  "src": "316:18:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -828,10 +1045,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 21,
+                    "id": 27,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "264:5:0",
+                    "src": "316:5:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -841,36 +1058,36 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "249:34:0"
+              "src": "287:48:0"
             },
             "payable": true,
             "returnParameters": {
-              "id": 24,
+              "id": 30,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "305:0:0"
+              "src": "357:0:0"
             },
-            "scope": 59,
-            "src": "233:368:0",
+            "scope": 74,
+            "src": "271:492:0",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 60,
-        "src": "26:577:0"
+        "scope": 75,
+        "src": "26:739:0"
       }
     ],
-    "src": "0:604:0"
+    "src": "0:766:0"
   },
   "legacyAST": {
     "absolutePath": "/Users/jemilezzet/development/consensys/bounty_buster/contracts/BountyBuster.sol",
     "exportedSymbols": {
       "BountyBuster": [
-        59
+        74
       ]
     },
-    "id": 60,
+    "id": 75,
     "nodeType": "SourceUnit",
     "nodes": [
       {
@@ -890,38 +1107,38 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 59,
+        "id": 74,
         "linearizedBaseContracts": [
-          59
+          74
         ],
         "name": "BountyBuster",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "BountyBuster.Task",
-            "id": 10,
+            "id": 14,
             "members": [
               {
                 "constant": false,
                 "id": 3,
-                "name": "poster",
+                "name": "title",
                 "nodeType": "VariableDeclaration",
-                "scope": 10,
-                "src": "70:14:0",
+                "scope": 14,
+                "src": "70:11:0",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_address",
-                  "typeString": "address"
+                  "typeIdentifier": "t_bytes_storage_ptr",
+                  "typeString": "bytes"
                 },
                 "typeName": {
                   "id": 2,
-                  "name": "address",
+                  "name": "bytes",
                   "nodeType": "ElementaryTypeName",
-                  "src": "70:7:0",
+                  "src": "70:5:0",
                   "typeDescriptions": {
-                    "typeIdentifier": "t_address",
-                    "typeString": "address"
+                    "typeIdentifier": "t_bytes_storage_ptr",
+                    "typeString": "bytes"
                   }
                 },
                 "value": null,
@@ -930,10 +1147,10 @@
               {
                 "constant": false,
                 "id": 5,
-                "name": "hunter",
+                "name": "poster",
                 "nodeType": "VariableDeclaration",
-                "scope": 10,
-                "src": "90:14:0",
+                "scope": 14,
+                "src": "87:14:0",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -944,7 +1161,7 @@
                   "id": 4,
                   "name": "address",
                   "nodeType": "ElementaryTypeName",
-                  "src": "90:7:0",
+                  "src": "87:7:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_address",
                     "typeString": "address"
@@ -956,10 +1173,36 @@
               {
                 "constant": false,
                 "id": 7,
+                "name": "hunter",
+                "nodeType": "VariableDeclaration",
+                "scope": 14,
+                "src": "107:14:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address",
+                  "typeString": "address"
+                },
+                "typeName": {
+                  "id": 6,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "107:7:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address",
+                    "typeString": "address"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 9,
                 "name": "reward",
                 "nodeType": "VariableDeclaration",
-                "scope": 10,
-                "src": "110:11:0",
+                "scope": 14,
+                "src": "127:11:0",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -967,10 +1210,10 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 6,
+                  "id": 8,
                   "name": "uint",
                   "nodeType": "ElementaryTypeName",
-                  "src": "110:4:0",
+                  "src": "127:4:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_uint256",
                     "typeString": "uint256"
@@ -981,11 +1224,11 @@
               },
               {
                 "constant": false,
-                "id": 9,
+                "id": 11,
                 "name": "description",
                 "nodeType": "VariableDeclaration",
-                "scope": 10,
-                "src": "127:17:0",
+                "scope": 14,
+                "src": "144:17:0",
                 "stateVariable": false,
                 "storageLocation": "default",
                 "typeDescriptions": {
@@ -993,13 +1236,39 @@
                   "typeString": "bytes"
                 },
                 "typeName": {
-                  "id": 8,
+                  "id": 10,
                   "name": "bytes",
                   "nodeType": "ElementaryTypeName",
-                  "src": "127:5:0",
+                  "src": "144:5:0",
                   "typeDescriptions": {
                     "typeIdentifier": "t_bytes_storage_ptr",
                     "typeString": "bytes"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 13,
+                "name": "created_at",
+                "nodeType": "VariableDeclaration",
+                "scope": 14,
+                "src": "167:15:0",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 12,
+                  "name": "uint",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "167:4:0",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
                   }
                 },
                 "value": null,
@@ -1008,50 +1277,50 @@
             ],
             "name": "Task",
             "nodeType": "StructDefinition",
-            "scope": 59,
-            "src": "52:97:0",
+            "scope": 74,
+            "src": "52:135:0",
             "visibility": "public"
           },
           {
             "constant": false,
-            "id": 14,
+            "id": 18,
             "name": "tasks",
             "nodeType": "VariableDeclaration",
-            "scope": 59,
-            "src": "153:37:0",
+            "scope": 74,
+            "src": "191:37:0",
             "stateVariable": true,
             "storageLocation": "default",
             "typeDescriptions": {
-              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$10_storage_$",
+              "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$14_storage_$",
               "typeString": "mapping(bytes32 => struct BountyBuster.Task)"
             },
             "typeName": {
-              "id": 13,
+              "id": 17,
               "keyType": {
-                "id": 11,
+                "id": 15,
                 "name": "bytes32",
                 "nodeType": "ElementaryTypeName",
-                "src": "161:7:0",
+                "src": "199:7:0",
                 "typeDescriptions": {
                   "typeIdentifier": "t_bytes32",
                   "typeString": "bytes32"
                 }
               },
               "nodeType": "Mapping",
-              "src": "153:24:0",
+              "src": "191:24:0",
               "typeDescriptions": {
-                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$10_storage_$",
+                "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$14_storage_$",
                 "typeString": "mapping(bytes32 => struct BountyBuster.Task)"
               },
               "valueType": {
                 "contractScope": null,
-                "id": 12,
+                "id": 16,
                 "name": "Task",
                 "nodeType": "UserDefinedTypeName",
-                "referencedDeclaration": 10,
-                "src": "172:4:0",
+                "referencedDeclaration": 14,
+                "src": "210:4:0",
                 "typeDescriptions": {
-                  "typeIdentifier": "t_struct$_Task_$10_storage_ptr",
+                  "typeIdentifier": "t_struct$_Task_$14_storage_ptr",
                   "typeString": "struct BountyBuster.Task"
                 }
               }
@@ -1062,21 +1331,21 @@
           {
             "anonymous": false,
             "documentation": null,
-            "id": 18,
+            "id": 22,
             "name": "TaskAdded",
             "nodeType": "EventDefinition",
             "parameters": {
-              "id": 17,
+              "id": 21,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 16,
+                  "id": 20,
                   "indexed": false,
                   "name": "taskHash",
                   "nodeType": "VariableDeclaration",
-                  "scope": 18,
-                  "src": "211:16:0",
+                  "scope": 22,
+                  "src": "249:16:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1084,10 +1353,10 @@
                     "typeString": "bytes32"
                   },
                   "typeName": {
-                    "id": 15,
+                    "id": 19,
                     "name": "bytes32",
                     "nodeType": "ElementaryTypeName",
-                    "src": "211:7:0",
+                    "src": "249:7:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
@@ -1097,43 +1366,108 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "210:18:0"
+              "src": "248:18:0"
             },
-            "src": "195:34:0"
+            "src": "233:34:0"
           },
           {
             "body": {
-              "id": 57,
+              "id": 72,
               "nodeType": "Block",
-              "src": "305:296:0",
+              "src": "357:406:0",
               "statements": [
                 {
                   "assignments": [
-                    26
+                    32
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 26,
+                      "id": 32,
+                      "name": "_createdAt",
+                      "nodeType": "VariableDeclaration",
+                      "scope": 73,
+                      "src": "363:15:0",
+                      "stateVariable": false,
+                      "storageLocation": "default",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_uint256",
+                        "typeString": "uint256"
+                      },
+                      "typeName": {
+                        "id": 31,
+                        "name": "uint",
+                        "nodeType": "ElementaryTypeName",
+                        "src": "363:4:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
+                        }
+                      },
+                      "value": null,
+                      "visibility": "internal"
+                    }
+                  ],
+                  "id": 35,
+                  "initialValue": {
+                    "argumentTypes": null,
+                    "expression": {
+                      "argumentTypes": null,
+                      "id": 33,
+                      "name": "block",
+                      "nodeType": "Identifier",
+                      "overloadedDeclarations": [],
+                      "referencedDeclaration": 79,
+                      "src": "381:5:0",
+                      "typeDescriptions": {
+                        "typeIdentifier": "t_magic_block",
+                        "typeString": "block"
+                      }
+                    },
+                    "id": 34,
+                    "isConstant": false,
+                    "isLValue": false,
+                    "isPure": false,
+                    "lValueRequested": false,
+                    "memberName": "timestamp",
+                    "nodeType": "MemberAccess",
+                    "referencedDeclaration": null,
+                    "src": "381:15:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_uint256",
+                      "typeString": "uint256"
+                    }
+                  },
+                  "nodeType": "VariableDeclarationStatement",
+                  "src": "363:33:0"
+                },
+                {
+                  "assignments": [
+                    37
+                  ],
+                  "declarations": [
+                    {
+                      "constant": false,
+                      "id": 37,
                       "name": "newTask",
                       "nodeType": "VariableDeclaration",
-                      "scope": 58,
-                      "src": "311:19:0",
+                      "scope": 73,
+                      "src": "402:19:0",
                       "stateVariable": false,
                       "storageLocation": "memory",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Task_$10_memory_ptr",
+                        "typeIdentifier": "t_struct$_Task_$14_memory_ptr",
                         "typeString": "struct BountyBuster.Task"
                       },
                       "typeName": {
                         "contractScope": null,
-                        "id": 25,
+                        "id": 36,
                         "name": "Task",
                         "nodeType": "UserDefinedTypeName",
-                        "referencedDeclaration": 10,
-                        "src": "311:4:0",
+                        "referencedDeclaration": 14,
+                        "src": "402:4:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_struct$_Task_$10_storage_ptr",
+                          "typeIdentifier": "t_struct$_Task_$14_storage_ptr",
                           "typeString": "struct BountyBuster.Task"
                         }
                       },
@@ -1141,7 +1475,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 34,
+                  "id": 47,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
@@ -1149,18 +1483,18 @@
                         "argumentTypes": null,
                         "expression": {
                           "argumentTypes": null,
-                          "id": 28,
+                          "id": 39,
                           "name": "msg",
                           "nodeType": "Identifier",
                           "overloadedDeclarations": [],
-                          "referencedDeclaration": 74,
-                          "src": "354:3:0",
+                          "referencedDeclaration": 89,
+                          "src": "445:3:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_magic_message",
                             "typeString": "msg"
                           }
                         },
-                        "id": 29,
+                        "id": 40,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1168,7 +1502,7 @@
                         "memberName": "sender",
                         "nodeType": "MemberAccess",
                         "referencedDeclaration": null,
-                        "src": "354:10:0",
+                        "src": "445:10:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_address",
                           "typeString": "address"
@@ -1177,14 +1511,14 @@
                       {
                         "argumentTypes": null,
                         "hexValue": "30",
-                        "id": 30,
+                        "id": 41,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": true,
                         "kind": "number",
                         "lValueRequested": false,
                         "nodeType": "Literal",
-                        "src": "380:1:0",
+                        "src": "471:1:0",
                         "subdenomination": null,
                         "typeDescriptions": {
                           "typeIdentifier": "t_rational_0_by_1",
@@ -1194,12 +1528,25 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 31,
+                        "id": 42,
+                        "name": "_title",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 24,
+                        "src": "487:6:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_bytes_memory_ptr",
+                          "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 43,
                         "name": "_reward",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 20,
-                        "src": "397:7:0",
+                        "referencedDeclaration": 26,
+                        "src": "509:7:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_uint256",
                           "typeString": "uint256"
@@ -1207,32 +1554,45 @@
                       },
                       {
                         "argumentTypes": null,
-                        "id": 32,
+                        "id": 44,
                         "name": "_description",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 22,
-                        "src": "425:12:0",
+                        "referencedDeclaration": 28,
+                        "src": "537:12:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
                           "typeString": "bytes memory"
+                        }
+                      },
+                      {
+                        "argumentTypes": null,
+                        "id": 45,
+                        "name": "_createdAt",
+                        "nodeType": "Identifier",
+                        "overloadedDeclarations": [],
+                        "referencedDeclaration": 32,
+                        "src": "569:10:0",
+                        "typeDescriptions": {
+                          "typeIdentifier": "t_uint256",
+                          "typeString": "uint256"
                         }
                       }
                     ],
                     "expression": {
                       "argumentTypes": null,
-                      "id": 27,
+                      "id": 38,
                       "name": "Task",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 10,
-                      "src": "333:4:0",
+                      "referencedDeclaration": 14,
+                      "src": "424:4:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_type$_t_struct$_Task_$10_storage_ptr_$",
+                        "typeIdentifier": "t_type$_t_struct$_Task_$14_storage_ptr_$",
                         "typeString": "type(struct BountyBuster.Task storage pointer)"
                       }
                     },
-                    "id": 33,
+                    "id": 46,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1241,31 +1601,33 @@
                     "names": [
                       "poster",
                       "hunter",
+                      "title",
                       "reward",
-                      "description"
+                      "description",
+                      "created_at"
                     ],
                     "nodeType": "FunctionCall",
-                    "src": "333:111:0",
+                    "src": "424:162:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Task_$10_memory",
+                      "typeIdentifier": "t_struct$_Task_$14_memory",
                       "typeString": "struct BountyBuster.Task memory"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "311:133:0"
+                  "src": "402:184:0"
                 },
                 {
                   "assignments": [
-                    36
+                    49
                   ],
                   "declarations": [
                     {
                       "constant": false,
-                      "id": 36,
+                      "id": 49,
                       "name": "taskHash",
                       "nodeType": "VariableDeclaration",
-                      "scope": 58,
-                      "src": "450:16:0",
+                      "scope": 73,
+                      "src": "592:16:0",
                       "stateVariable": false,
                       "storageLocation": "default",
                       "typeDescriptions": {
@@ -1273,10 +1635,10 @@
                         "typeString": "bytes32"
                       },
                       "typeName": {
-                        "id": 35,
+                        "id": 48,
                         "name": "bytes32",
                         "nodeType": "ElementaryTypeName",
-                        "src": "450:7:0",
+                        "src": "592:7:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -1286,7 +1648,7 @@
                       "visibility": "internal"
                     }
                   ],
-                  "id": 46,
+                  "id": 61,
                   "initialValue": {
                     "argumentTypes": null,
                     "arguments": [
@@ -1297,26 +1659,26 @@
                             "argumentTypes": null,
                             "expression": {
                               "argumentTypes": null,
-                              "id": 40,
+                              "id": 53,
                               "name": "newTask",
                               "nodeType": "Identifier",
                               "overloadedDeclarations": [],
-                              "referencedDeclaration": 26,
-                              "src": "496:7:0",
+                              "referencedDeclaration": 37,
+                              "src": "638:7:0",
                               "typeDescriptions": {
-                                "typeIdentifier": "t_struct$_Task_$10_memory_ptr",
+                                "typeIdentifier": "t_struct$_Task_$14_memory_ptr",
                                 "typeString": "struct BountyBuster.Task memory"
                               }
                             },
-                            "id": 41,
+                            "id": 54,
                             "isConstant": false,
                             "isLValue": true,
                             "isPure": false,
                             "lValueRequested": false,
                             "memberName": "poster",
                             "nodeType": "MemberAccess",
-                            "referencedDeclaration": 3,
-                            "src": "496:14:0",
+                            "referencedDeclaration": 5,
+                            "src": "638:14:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_address",
                               "typeString": "address"
@@ -1324,12 +1686,25 @@
                           },
                           {
                             "argumentTypes": null,
-                            "id": 42,
+                            "id": 55,
+                            "name": "_title",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 24,
+                            "src": "654:6:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 56,
                             "name": "_reward",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 20,
-                            "src": "512:7:0",
+                            "referencedDeclaration": 26,
+                            "src": "662:7:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
@@ -1337,15 +1712,28 @@
                           },
                           {
                             "argumentTypes": null,
-                            "id": 43,
+                            "id": 57,
                             "name": "_description",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 22,
-                            "src": "521:12:0",
+                            "referencedDeclaration": 28,
+                            "src": "671:12:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_bytes_memory_ptr",
                               "typeString": "bytes memory"
+                            }
+                          },
+                          {
+                            "argumentTypes": null,
+                            "id": 58,
+                            "name": "_createdAt",
+                            "nodeType": "Identifier",
+                            "overloadedDeclarations": [],
+                            "referencedDeclaration": 32,
+                            "src": "685:10:0",
+                            "typeDescriptions": {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
                             }
                           }
                         ],
@@ -1356,28 +1744,36 @@
                               "typeString": "address"
                             },
                             {
+                              "typeIdentifier": "t_bytes_memory_ptr",
+                              "typeString": "bytes memory"
+                            },
+                            {
                               "typeIdentifier": "t_uint256",
                               "typeString": "uint256"
                             },
                             {
                               "typeIdentifier": "t_bytes_memory_ptr",
                               "typeString": "bytes memory"
+                            },
+                            {
+                              "typeIdentifier": "t_uint256",
+                              "typeString": "uint256"
                             }
                           ],
                           "expression": {
                             "argumentTypes": null,
-                            "id": 38,
+                            "id": 51,
                             "name": "abi",
                             "nodeType": "Identifier",
                             "overloadedDeclarations": [],
-                            "referencedDeclaration": 61,
-                            "src": "479:3:0",
+                            "referencedDeclaration": 76,
+                            "src": "621:3:0",
                             "typeDescriptions": {
                               "typeIdentifier": "t_magic_abi",
                               "typeString": "abi"
                             }
                           },
-                          "id": 39,
+                          "id": 52,
                           "isConstant": false,
                           "isLValue": false,
                           "isPure": true,
@@ -1385,13 +1781,13 @@
                           "memberName": "encodePacked",
                           "nodeType": "MemberAccess",
                           "referencedDeclaration": null,
-                          "src": "479:16:0",
+                          "src": "621:16:0",
                           "typeDescriptions": {
                             "typeIdentifier": "t_function_abiencodepacked_pure$__$returns$_t_bytes_memory_ptr_$",
                             "typeString": "function () pure returns (bytes memory)"
                           }
                         },
-                        "id": 44,
+                        "id": 59,
                         "isConstant": false,
                         "isLValue": false,
                         "isPure": false,
@@ -1399,7 +1795,7 @@
                         "lValueRequested": false,
                         "names": [],
                         "nodeType": "FunctionCall",
-                        "src": "479:55:0",
+                        "src": "621:75:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes_memory_ptr",
                           "typeString": "bytes memory"
@@ -1413,18 +1809,18 @@
                           "typeString": "bytes memory"
                         }
                       ],
-                      "id": 37,
+                      "id": 50,
                       "name": "keccak256",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 68,
-                      "src": "469:9:0",
+                      "referencedDeclaration": 83,
+                      "src": "611:9:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_sha3_pure$__$returns$_t_bytes32_$",
                         "typeString": "function () pure returns (bytes32)"
                       }
                     },
-                    "id": 45,
+                    "id": 60,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1432,19 +1828,19 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "469:66:0",
+                    "src": "611:86:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes32",
                       "typeString": "bytes32"
                     }
                   },
                   "nodeType": "VariableDeclarationStatement",
-                  "src": "450:85:0"
+                  "src": "592:105:0"
                 },
                 {
                   "expression": {
                     "argumentTypes": null,
-                    "id": 51,
+                    "id": 66,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1453,26 +1849,26 @@
                       "argumentTypes": null,
                       "baseExpression": {
                         "argumentTypes": null,
-                        "id": 47,
+                        "id": 62,
                         "name": "tasks",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 14,
-                        "src": "541:5:0",
+                        "referencedDeclaration": 18,
+                        "src": "703:5:0",
                         "typeDescriptions": {
-                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$10_storage_$",
+                          "typeIdentifier": "t_mapping$_t_bytes32_$_t_struct$_Task_$14_storage_$",
                           "typeString": "mapping(bytes32 => struct BountyBuster.Task storage ref)"
                         }
                       },
-                      "id": 49,
+                      "id": 64,
                       "indexExpression": {
                         "argumentTypes": null,
-                        "id": 48,
+                        "id": 63,
                         "name": "taskHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 36,
-                        "src": "547:8:0",
+                        "referencedDeclaration": 49,
+                        "src": "709:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -1483,9 +1879,9 @@
                       "isPure": false,
                       "lValueRequested": true,
                       "nodeType": "IndexAccess",
-                      "src": "541:15:0",
+                      "src": "703:15:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Task_$10_storage",
+                        "typeIdentifier": "t_struct$_Task_$14_storage",
                         "typeString": "struct BountyBuster.Task storage ref"
                       }
                     },
@@ -1493,26 +1889,26 @@
                     "operator": "=",
                     "rightHandSide": {
                       "argumentTypes": null,
-                      "id": 50,
+                      "id": 65,
                       "name": "newTask",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 26,
-                      "src": "559:7:0",
+                      "referencedDeclaration": 37,
+                      "src": "721:7:0",
                       "typeDescriptions": {
-                        "typeIdentifier": "t_struct$_Task_$10_memory_ptr",
+                        "typeIdentifier": "t_struct$_Task_$14_memory_ptr",
                         "typeString": "struct BountyBuster.Task memory"
                       }
                     },
-                    "src": "541:25:0",
+                    "src": "703:25:0",
                     "typeDescriptions": {
-                      "typeIdentifier": "t_struct$_Task_$10_storage",
+                      "typeIdentifier": "t_struct$_Task_$14_storage",
                       "typeString": "struct BountyBuster.Task storage ref"
                     }
                   },
-                  "id": 52,
+                  "id": 67,
                   "nodeType": "ExpressionStatement",
-                  "src": "541:25:0"
+                  "src": "703:25:0"
                 },
                 {
                   "eventCall": {
@@ -1520,12 +1916,12 @@
                     "arguments": [
                       {
                         "argumentTypes": null,
-                        "id": 54,
+                        "id": 69,
                         "name": "taskHash",
                         "nodeType": "Identifier",
                         "overloadedDeclarations": [],
-                        "referencedDeclaration": 36,
-                        "src": "587:8:0",
+                        "referencedDeclaration": 49,
+                        "src": "749:8:0",
                         "typeDescriptions": {
                           "typeIdentifier": "t_bytes32",
                           "typeString": "bytes32"
@@ -1539,18 +1935,18 @@
                           "typeString": "bytes32"
                         }
                       ],
-                      "id": 53,
+                      "id": 68,
                       "name": "TaskAdded",
                       "nodeType": "Identifier",
                       "overloadedDeclarations": [],
-                      "referencedDeclaration": 18,
-                      "src": "577:9:0",
+                      "referencedDeclaration": 22,
+                      "src": "739:9:0",
                       "typeDescriptions": {
                         "typeIdentifier": "t_function_event_nonpayable$_t_bytes32_$returns$__$",
                         "typeString": "function (bytes32)"
                       }
                     },
-                    "id": 55,
+                    "id": 70,
                     "isConstant": false,
                     "isLValue": false,
                     "isPure": false,
@@ -1558,20 +1954,20 @@
                     "lValueRequested": false,
                     "names": [],
                     "nodeType": "FunctionCall",
-                    "src": "577:19:0",
+                    "src": "739:19:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_tuple$__$",
                       "typeString": "tuple()"
                     }
                   },
-                  "id": 56,
+                  "id": 71,
                   "nodeType": "EmitStatement",
-                  "src": "572:24:0"
+                  "src": "734:24:0"
                 }
               ]
             },
             "documentation": null,
-            "id": 58,
+            "id": 73,
             "implemented": true,
             "isConstructor": false,
             "isDeclaredConst": false,
@@ -1579,16 +1975,42 @@
             "name": "addTask",
             "nodeType": "FunctionDefinition",
             "parameters": {
-              "id": 23,
+              "id": 29,
               "nodeType": "ParameterList",
               "parameters": [
                 {
                   "constant": false,
-                  "id": 20,
+                  "id": 24,
+                  "name": "_title",
+                  "nodeType": "VariableDeclaration",
+                  "scope": 73,
+                  "src": "288:12:0",
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_bytes_memory_ptr",
+                    "typeString": "bytes"
+                  },
+                  "typeName": {
+                    "id": 23,
+                    "name": "bytes",
+                    "nodeType": "ElementaryTypeName",
+                    "src": "288:5:0",
+                    "typeDescriptions": {
+                      "typeIdentifier": "t_bytes_storage_ptr",
+                      "typeString": "bytes"
+                    }
+                  },
+                  "value": null,
+                  "visibility": "internal"
+                },
+                {
+                  "constant": false,
+                  "id": 26,
                   "name": "_reward",
                   "nodeType": "VariableDeclaration",
-                  "scope": 58,
-                  "src": "250:12:0",
+                  "scope": 73,
+                  "src": "302:12:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1596,10 +2018,10 @@
                     "typeString": "uint256"
                   },
                   "typeName": {
-                    "id": 19,
+                    "id": 25,
                     "name": "uint",
                     "nodeType": "ElementaryTypeName",
-                    "src": "250:4:0",
+                    "src": "302:4:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_uint256",
                       "typeString": "uint256"
@@ -1610,11 +2032,11 @@
                 },
                 {
                   "constant": false,
-                  "id": 22,
+                  "id": 28,
                   "name": "_description",
                   "nodeType": "VariableDeclaration",
-                  "scope": 58,
-                  "src": "264:18:0",
+                  "scope": 73,
+                  "src": "316:18:0",
                   "stateVariable": false,
                   "storageLocation": "default",
                   "typeDescriptions": {
@@ -1622,10 +2044,10 @@
                     "typeString": "bytes"
                   },
                   "typeName": {
-                    "id": 21,
+                    "id": 27,
                     "name": "bytes",
                     "nodeType": "ElementaryTypeName",
-                    "src": "264:5:0",
+                    "src": "316:5:0",
                     "typeDescriptions": {
                       "typeIdentifier": "t_bytes_storage_ptr",
                       "typeString": "bytes"
@@ -1635,27 +2057,27 @@
                   "visibility": "internal"
                 }
               ],
-              "src": "249:34:0"
+              "src": "287:48:0"
             },
             "payable": true,
             "returnParameters": {
-              "id": 24,
+              "id": 30,
               "nodeType": "ParameterList",
               "parameters": [],
-              "src": "305:0:0"
+              "src": "357:0:0"
             },
-            "scope": 59,
-            "src": "233:368:0",
+            "scope": 74,
+            "src": "271:492:0",
             "stateMutability": "payable",
             "superFunction": null,
             "visibility": "public"
           }
         ],
-        "scope": 60,
-        "src": "26:577:0"
+        "scope": 75,
+        "src": "26:739:0"
       }
     ],
-    "src": "0:604:0"
+    "src": "0:766:0"
   },
   "compiler": {
     "name": "solc",
@@ -1697,8 +2119,26 @@
       "links": {},
       "address": "0x612fbb0fb7c9cb26482203378b41d727bad35f76",
       "transactionHash": "0x932500a2d4ade7becf6f2b8beaba8a23d476a7224e4a53a859acae7dd0ea6062"
+    },
+    "1532732992728": {
+      "events": {},
+      "links": {},
+      "address": "0x0d25bc434c40e2db633b4bfa4935a9037c12761b",
+      "transactionHash": "0x932500a2d4ade7becf6f2b8beaba8a23d476a7224e4a53a859acae7dd0ea6062"
+    },
+    "1532735590282": {
+      "events": {},
+      "links": {},
+      "address": "0x228456282f9c9c84fb5b5c3a7f8074bc403bd85d",
+      "transactionHash": "0xa33430ad7fb1a85ee2e3c4059a846499b01db529cfa6eab2cb9a8a3a645a778b"
+    },
+    "1532735742335": {
+      "events": {},
+      "links": {},
+      "address": "0x0945628228f866b1bb3a79b4682616d82a7884d3",
+      "transactionHash": "0xe36444482b48ab352955820069ad0b459e96489d69b4bc508451f24114f862b3"
     }
   },
   "schemaVersion": "2.0.1",
-  "updatedAt": "2018-07-27T02:31:58.288Z"
+  "updatedAt": "2018-07-27T23:56:18.836Z"
 }

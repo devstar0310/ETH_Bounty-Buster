@@ -4,16 +4,22 @@ import TextField from '@material-ui/core/TextField';
 
 import withWeb3 from '../providers/withWeb3';
 import withBountyBuster from '../providers/withBountyBuster';
+import TasksTableContainer from './TasksTableContainer';
 import Modal from '../components/modal/Modal';
 import CustomButton from '../components/button/CustomButton';
 import getEvents from '../utils/getEvents';
+import Task from '../utils/Task';
 import './TaskContainer.css';
+
+const PER_PAGE_TASKS = 10;
 
 class TasksContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       tasks: null,
+      taskAddedEvents: null,
+
       isAddTaskModalVisible: false,
       addTaskTitle: '',
       addTaskReward: '',
@@ -22,21 +28,35 @@ class TasksContainer extends Component {
   }
 
   componentWillMount() {
-    let { bountyBuster } = this.props;
-    // getEvents(bountyBuster, 'TaskAdded')
-    //   .then((events) => {
-    //     return bountyBuster.tasks.call(events[0].args.taskHash)
-    //   })
-    //   .then((task) => {
-    //   })
+    let { bountyBuster, web3 } = this.props;
+    getEvents(bountyBuster, 'TaskAdded')
+      .then((taskAddedEvents) => {
+        this.setState({ taskAddedEvents });
+        let getTasks = taskAddedEvents.map((taskAddedEvent) => {
+          return bountyBuster.tasks.call(taskAddedEvent.args.taskHash);
+        });
+        return Promise.all(getTasks);
+      })
+      .then((taskStructs) => {
+        let tasks = taskStructs.map((taskStruct, index) =>
+          new Task(this.state.taskAddedEvents[index].args.taskHash, taskStruct)
+        );
+        this.setState({ tasks });
+      });
   }
 
   addTask() {
     let { bountyBuster, web3 } = this.props;
     let { addTaskTitle, addTaskReward, addTaskDescription } = this.state;
-    bountyBuster.addTask(addTaskReward, addTaskDescription, { from: web3.eth.accounts[0] })
+    addTaskReward = parseFloat(addTaskReward);
+    bountyBuster.addTask(addTaskTitle, addTaskReward, addTaskDescription, { from: web3.eth.accounts[0] })
       .then(() => {
-        debugger;
+        this.setState({
+          addTaskTitle: '',
+          addTaskReward: '',
+          addTaskDescription: ''
+        });
+        this.closeAddTaskModal();
       });
   }
 
@@ -54,15 +74,9 @@ class TasksContainer extends Component {
         <div className='AddTask' >
           <CustomButton onClick={this.displayAddTaskModal.bind(this)} iconName='add' />
         </div>
-        <table className='TaskTable'>
-          <thead>
-            <tr>
-              <th>Title</th>
-              <th>Reward</th>
-              <th>Poster</th>
-            </tr>
-          </thead>
-        </table>
+        <div className='TaskTable'>
+          <TasksTableContainer tasks={this.state.tasks} />
+        </div>
         {this.state.isAddTaskModalVisible ?
           <Modal onClose={this.closeAddTaskModal.bind(this)}>
             <form className='AddTaskModalForm'>
