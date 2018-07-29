@@ -20,7 +20,7 @@ const TasksTableContainer = ({ tasks }) => {
         {tasks ? tasks.map((task) => {
           return (
             <TableBody key={task.hash}>
-              <TableRow>
+              <TableRow className='TasksRow' hover={true} onClick={() => console.log('suh')}>
                 <TableCell>{task.title}</TableCell>
                 <TableCell>{task.reward}</TableCell>
                 <TableCell>{task.poster}</TableCell>
