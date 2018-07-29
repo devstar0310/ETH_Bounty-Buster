@@ -17,7 +17,7 @@ const TasksTableContainer = ({ tasks }) => {
           <TableCell>Poster</TableCell>
         </TableRow>
       </TableHead>
-        {tasks ? tasks.map((task) => {
+        {tasks ? tasks.toArray().map((task) => {
           return (
             <TableBody key={task.hash}>
               <TableRow className='TasksRow' hover={true} onClick={() => console.log('suh')}>

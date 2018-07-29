@@ -35,11 +35,30 @@ class TasksContainer extends Component {
         return Promise.all(getTasks);
       })
       .then((taskStructs) => {
-        let tasks = taskStructs.map((taskStruct, index) =>
-        new Task(this.state.taskAddedEvents[index].args.taskHash, taskStruct)
-      );
-      this.setState({ tasks });
-    });
+        let tasksMap = {};
+        taskStructs.forEach((taskStruct, index) => {
+          let task = new Task(this.state.taskAddedEvents[index].args.taskHash, taskStruct);
+          tasksMap[task.hash] = task;
+        });
+        this.setState({ tasks: Map(tasksMap) });
+        bountyBuster.TaskAdded().watch(this.addTaskWatch.bind(this));
+      });
+  }
+
+  addTaskWatch(error, taskAddedEvent) {
+    let { bountyBuster } = this.props;
+    let { tasks } = this.state;
+    let { taskHash } = taskAddedEvent.args;
+    if (!tasks.get(taskHash)) {
+      bountyBuster.tasks.call(taskHash).then((taskStruct) => {
+        let task = new Task(taskHash, taskStruct);
+        this.setState(({ tasks }) => {
+          return {
+            tasks: tasks.update(taskHash, () => task)
+          }
+        });
+      });
+    }
   }
 
   addTask() {
