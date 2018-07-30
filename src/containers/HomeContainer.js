@@ -3,7 +3,7 @@ import { Redirect } from 'react-router-dom';
 
 const HomeContainer = () => {
   return (
-    <Redirect to='/tasks' />
+    <Redirect to='/dashboard' />
   );
 }
 

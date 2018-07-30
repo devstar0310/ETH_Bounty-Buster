@@ -1,0 +1,16 @@
+.SideBarContainer {
+  position: absolute;
+  top: 75px;
+  bottom: 0px;
+  left: 0;
+  width: 85px;
+  background-color: #e9e7ff;
+  border-right: 2px solid #8686ff;
+
+  display: flex;
+  flex-direction: column;
+}
+
+.SideBarContainer > button {
+  margin: 10px 0;
+}

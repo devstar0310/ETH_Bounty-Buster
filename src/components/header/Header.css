@@ -1,7 +1,14 @@
-.header-container {
+.HeaderContainer {
   height: 75px;
   display: flex;
   justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  background-color: #dddddd38;
+  background-color: #01379ad6;
+  color: white;
+  text-align: left;
+}
+
+.HeaderTitle {
+  padding-left: 20px;
 }
