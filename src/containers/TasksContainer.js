@@ -10,7 +10,7 @@ import Modal from '../components/modal/Modal';
 import CustomButton from '../components/button/CustomButton';
 import getEvents from '../utils/getEvents';
 import Task from '../utils/Task';
-import './TaskContainer.css';
+import './TasksContainer.css';
 
 class TasksContainer extends Component {
   constructor(props) {
@@ -19,7 +19,8 @@ class TasksContainer extends Component {
       tasks: null,
       taskAddedEvents: null,
 
-      addTaskModal: Map({ visible: false, title: '', reward: '', description: '' })
+      addTaskModal: Map({ visible: false, title: '', reward: '', description: '' }),
+      selectedTaskHash: null
     };
   }
 
@@ -52,11 +53,9 @@ class TasksContainer extends Component {
     if (!tasks.get(taskHash)) {
       bountyBuster.tasks.call(taskHash).then((taskStruct) => {
         let task = new Task(taskHash, taskStruct);
-        this.setState(({ tasks }) => {
-          return {
-            tasks: tasks.update(taskHash, () => task)
-          }
-        });
+        this.setState(({ tasks }) => ({
+          tasks: tasks.update(taskHash, () => task)
+        }));
       });
     }
   }
@@ -65,15 +64,19 @@ class TasksContainer extends Component {
     let { bountyBuster, web3 } = this.props;
     let { addTaskModal } = this.state;
     let title = addTaskModal.get('title');
-    let reward = parseFloat(addTaskModal.get('reward'));
+    let reward = addTaskModal.get('reward');
     let description = addTaskModal.get('description');
-    bountyBuster.addTask(title, reward, description, { from: web3.eth.accounts[0] })
+    bountyBuster.addTask(title, description, { from: web3.eth.accounts[0], value: web3.toWei(reward, 'ether') })
       .then(() => {
         this.handleAddTaskModalUpdate('visible', false);
         this.handleAddTaskModalUpdate('title', '');
         this.handleAddTaskModalUpdate('reward', '');
         this.handleAddTaskModalUpdate('description', '');
       });
+  }
+
+  redirectToTask(taskHash) {
+    this.props.history.push(`${this.props.match.path}/${taskHash}`);
   }
 
   handleAddTaskModalUpdate(property, value) {
@@ -84,12 +87,12 @@ class TasksContainer extends Component {
 
   render() {
     return (
-      <div className='TaskContainer'>
+      <div className='TasksContainer'>
         <div className='AddTask' >
           <CustomButton onClick={this.handleAddTaskModalUpdate.bind(this, 'visible', true)} iconName='add' />
         </div>
         <div className='TaskTable'>
-          <TasksTableContainer tasks={this.state.tasks} />
+          <TasksTableContainer tasks={this.state.tasks} onClickTask={this.redirectToTask.bind(this)} />
         </div>
         {this.state.addTaskModal.get('visible') ?
           <Modal onClose={this.handleAddTaskModalUpdate.bind(this, 'visible', false)}>

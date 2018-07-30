@@ -1,23 +1,38 @@
 .TaskContainer {
-  margin: 30px;
-  overflow: hidden;
+  margin: 40px 150px 0;
 }
 
-.TaskTable {
+.TaskTitle {
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  padding-bottom: 15px;
+}
+
+.TaskData {
+  margin-top: 30px;
+}
+
+.TaskData > .TaskReward {
+  width: 40%;
+}
+
+.TaskData > .TaskPoster {
   width: 60%;
-  margin: auto;
-  margin-top: 75px;
 }
 
-.AddTask {
-  float: right;
-}
-
-.AddTaskModalForm {
-  margin: 20px;
-}
-
-.AddTaskModalForm > * {
-  margin-bottom: 10px !important;
+.TaskData > .TaskDescription {
   width: 100%;
+}
+
+.TaskData > div {
+  margin-bottom: 30px;
+}
+
+.TaskTitle > p {
+  margin: 0;
+  font-size: 30px;
+}
+
+.OpenTaskButton {
+  display: flex;
+  justify-content: center;
 }

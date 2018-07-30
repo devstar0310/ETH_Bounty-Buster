@@ -1,0 +1,22 @@
+.TasksContainer {
+  overflow: hidden;
+}
+
+.TaskTable {
+  width: 60%;
+  margin: auto;
+  margin-top: 75px;
+}
+
+.AddTask {
+  float: right;
+}
+
+.AddTaskModalForm {
+  margin: 20px;
+}
+
+.AddTaskModalForm > * {
+  margin-bottom: 10px !important;
+  width: 100%;
+}

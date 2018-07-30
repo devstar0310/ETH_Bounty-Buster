@@ -14,7 +14,7 @@ contract BountyBuster {
 
   event TaskAdded(bytes32 taskHash);
 
-  function addTask(bytes _title, uint _reward, bytes _description)
+  function addTask(bytes _title, bytes _description)
   public
   payable
   {
@@ -23,11 +23,11 @@ contract BountyBuster {
       poster: msg.sender,
       hunter: 0,
       title: _title,
-      reward: _reward,
+      reward: msg.value,
       description: _description,
       created_at: _createdAt
     });
-    bytes32 taskHash = keccak256(abi.encodePacked(newTask.poster, _title, _reward, _description, _createdAt));
+    bytes32 taskHash = keccak256(abi.encodePacked(newTask.poster, _title, msg.value, _description, _createdAt));
     tasks[taskHash] = newTask;
     emit TaskAdded(taskHash);
   }

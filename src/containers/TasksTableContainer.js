@@ -4,10 +4,11 @@ import TableBody from '@material-ui/core/TableBody';
 import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
+import Web3Utils from 'web3-utils';
 
 import './TasksTableContainer.css';
 
-const TasksTableContainer = ({ tasks }) => {
+const TasksTableContainer = ({ tasks, onClickTask }) => {
   return (
     <Table>
       <TableHead>
@@ -20,9 +21,9 @@ const TasksTableContainer = ({ tasks }) => {
         {tasks ? tasks.toArray().map((task) => {
           return (
             <TableBody key={task.hash}>
-              <TableRow className='TasksRow' hover={true} onClick={() => console.log('suh')}>
+              <TableRow className='TasksRow' hover={true} onClick={() => onClickTask(task.hash)}>
                 <TableCell>{task.title}</TableCell>
-                <TableCell>{task.reward}</TableCell>
+                <TableCell>{Web3Utils.fromWei(task.reward, 'ether')}</TableCell>
                 <TableCell>{task.poster}</TableCell>
               </TableRow>
             </TableBody>

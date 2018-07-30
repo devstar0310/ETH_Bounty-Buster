@@ -5,7 +5,7 @@ import getWeb3 from '../utils/getWeb3';
 
 class Web3Provider extends Component {
   getChildContext() {
-    return { web3: this.web3 };
+    return { web3: this.web3, account: this.account };
   }
 
   constructor(props) {
@@ -17,6 +17,7 @@ class Web3Provider extends Component {
     getWeb3
       .then((results) => {
         this.web3 = results.web3;
+        this.account = results.web3.eth.accounts[0];
         this.setState({ loading: false });
       })
   }
@@ -27,7 +28,8 @@ class Web3Provider extends Component {
 }
 
 Web3Provider.childContextTypes = {
-  web3: PropTypes.object
+  web3: PropTypes.object,
+  account: PropTypes.string
 };
 
 export default Web3Provider;

@@ -15,7 +15,7 @@ class Task {
     this.title = Web3Utils.toAscii(taskStruct[TASK_PROPERTY_TO_INDEX.title]);
     this.poster = taskStruct[TASK_PROPERTY_TO_INDEX.poster];
     this.hunter = taskStruct[TASK_PROPERTY_TO_INDEX.hunter];
-    this.reward = taskStruct[TASK_PROPERTY_TO_INDEX.reward].toNumber();
+    this.reward = taskStruct[TASK_PROPERTY_TO_INDEX.reward].toNumber().toString();
     this.description = Web3Utils.toAscii(taskStruct[TASK_PROPERTY_TO_INDEX.description]);
     this.createdAt = taskStruct[TASK_PROPERTY_TO_INDEX.createdAt].toNumber();
   }

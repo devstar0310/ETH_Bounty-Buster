@@ -4,6 +4,7 @@ import { BrowserRouter as Router, Route } from 'react-router-dom';
 import HeaderContainer from './containers/HeaderContainer';
 import HomeContainer from './containers/HomeContainer';
 import TasksContainer from './containers/TasksContainer';
+import TaskContainer from './containers/TaskContainer';
 import Web3Provider from './providers/Web3Provider';
 import BountyBusterProvider from './providers/BountyBusterProvider';
 
@@ -22,7 +23,8 @@ class App extends Component {
             <Router>
               <div>
                 <Route exact path='/' component={HomeContainer} />
-                <Route path='/tasks' component={TasksContainer} />
+                <Route exact path='/tasks' component={TasksContainer} />
+                <Route path='/tasks/:taskHash' component={TaskContainer} />
               </div>
             </Router>
           </div>
