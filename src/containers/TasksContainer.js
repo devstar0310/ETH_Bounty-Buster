@@ -8,7 +8,7 @@ import withBountyBuster from '../providers/withBountyBuster';
 import TasksTableContainer from './TasksTableContainer';
 import Modal from '../components/modal/Modal';
 import CustomButton from '../components/button/CustomButton';
-import getEvents from '../utils/getEvents';
+import getTasks from '../utils/getTasks';
 import Task from '../utils/Task';
 import './TasksContainer.css';
 
@@ -26,22 +26,9 @@ class TasksContainer extends Component {
 
   componentWillMount() {
     let { bountyBuster } = this.props;
-    getEvents(bountyBuster, 'TaskAdded')
-      .then((taskAddedEvents) => {
-        this.setState({ taskAddedEvents });
-        let getTasks = taskAddedEvents.map((taskAddedEvent) => {
-          let { taskHash } = taskAddedEvent.args;
-          return bountyBuster.tasks.call(taskHash);
-        });
-        return Promise.all(getTasks);
-      })
-      .then((taskStructs) => {
-        let tasksMap = {};
-        taskStructs.forEach((taskStruct, index) => {
-          let task = new Task(this.state.taskAddedEvents[index].args.taskHash, taskStruct);
-          tasksMap[task.hash] = task;
-        });
-        this.setState({ tasks: Map(tasksMap) });
+    getTasks(bountyBuster)
+      .then((tasks) => {
+        this.setState({ tasks });
         bountyBuster.TaskAdded().watch(this.addTaskWatch.bind(this));
       });
   }

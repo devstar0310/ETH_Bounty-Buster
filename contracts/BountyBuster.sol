@@ -12,7 +12,7 @@ contract BountyBuster {
 
   mapping(bytes32 => Task) public tasks;
 
-  event TaskAdded(bytes32 taskHash);
+  event TaskAdded(bytes32 taskHash, address indexed poster);
 
   function addTask(bytes _title, bytes _description)
   public
@@ -29,6 +29,6 @@ contract BountyBuster {
     });
     bytes32 taskHash = keccak256(abi.encodePacked(newTask.poster, _title, msg.value, _description, _createdAt));
     tasks[taskHash] = newTask;
-    emit TaskAdded(taskHash);
+    emit TaskAdded(taskHash, msg.sender);
   }
 }

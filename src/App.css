@@ -5,8 +5,10 @@ body,
 
 .App {
   position: absolute;
-  left: 85px;
+  left: 65px;
   right: 0;
   bottom: 0;
   top: 75px;
+  padding: 40px 40px 0;
+  background-color: rgba(0,0,0,.02);
 }

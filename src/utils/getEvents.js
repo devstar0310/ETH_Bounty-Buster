@@ -1,7 +1,7 @@
-export default function getEvents(contract, eventName) {
+export default function getEvents(contract, eventName, filter) {
   if (eventName) {
     return new Promise((resolve, reject) => {
-      contract[eventName]({}, { fromBlock: 0, toBlock: 'latest' })
+      contract[eventName](filter, { fromBlock: 0, toBlock: 'latest' })
         .get((error, events) => {
           if (error) {
             reject(error);

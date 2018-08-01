@@ -22,13 +22,15 @@ class App extends Component {
         <BountyBusterProvider>
           <div>
             <HeaderContainer />
-            <SideBarContainer />
             <Router>
-              <div className='App'>
-                <Route exact path='/' component={HomeContainer} />
-                <Route exact path='/dashboard' component={DashboardContainer} />
-                <Route exact path='/tasks' component={TasksContainer} />
-                <Route path='/tasks/:taskHash' component={TaskContainer} />
+              <div>
+                <SideBarContainer />
+                <div className='App'>
+                  <Route exact path='/' component={HomeContainer} />
+                  <Route exact path='/dashboard' component={DashboardContainer} />
+                  <Route exact path='/tasks' component={TasksContainer} />
+                  <Route path='/tasks/:taskHash' component={TaskContainer} />
+                </div>
               </div>
             </Router>
           </div>

@@ -1,15 +1,18 @@
 import React from 'react';
+import { withRouter } from 'react-router';
 
 import CustomButton from '../components/button/CustomButton';
 import './SideBarContainer.css';
 
-const SideBarContainer = () => {
+const SideBarContainer = ({ history }) => {
   return (
     <div className='SideBarContainer'>
-      <CustomButton iconName='home' />
-      <CustomButton iconName='list' />
+      <div className='SideBarLinks'>
+        <CustomButton iconName='home' onClick={() => history.push('/dashboard')} />
+        <CustomButton iconName='list' onClick={() => history.push('/tasks')} />
+      </div>
     </div>
   );
 }
 
-export default SideBarContainer;
+export default withRouter(SideBarContainer);

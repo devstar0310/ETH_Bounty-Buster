@@ -3,14 +3,18 @@
   top: 75px;
   bottom: 0px;
   left: 0;
-  width: 85px;
-  background-color: #e9e7ff;
-  border-right: 2px solid #8686ff;
-
-  display: flex;
-  flex-direction: column;
+  width: 65px;
+  /* background-color: #e9e7ff; */
+  border-right: .5px solid rgba(0,0,0,.3);
+  z-index: -100;
 }
 
-.SideBarContainer > button {
-  margin: 10px 0;
+.SideBarLinks {
+  display: flex;
+  flex-direction: column;
+  margin-top: 50px;
+}
+
+.SideBarLinks > button {
+  margin: 0;
 }
