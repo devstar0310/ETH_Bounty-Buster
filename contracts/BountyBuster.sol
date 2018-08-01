@@ -1,12 +1,19 @@
 pragma solidity ^0.4.18;
 
 contract BountyBuster {
+  enum TaskStatus {
+    Posted,
+    Submitted,
+    Completed
+  }
+
   struct Task {
     bytes title;
     address poster;
     address hunter;
     uint reward;
     bytes description;
+    TaskStatus status;
     uint created_at;
   }
 
@@ -25,6 +32,7 @@ contract BountyBuster {
       title: _title,
       reward: msg.value,
       description: _description,
+      status: TaskStatus.Posted,
       created_at: _createdAt
     });
     bytes32 taskHash = keccak256(abi.encodePacked(newTask.poster, _title, msg.value, _description, _createdAt));

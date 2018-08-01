@@ -6,7 +6,20 @@ const TASK_PROPERTY_TO_INDEX = {
   hunter: 2,
   reward: 3,
   description: 4,
-  createdAt: 5
+  status: 5,
+  createdAt: 6
+};
+
+const TaskStatusEnum = {
+  POSTED: 0,
+  SUBMITTED: 1,
+  COMPLETED: 2,
+
+  properties: {
+    0: { displayName: 'Posted' },
+    1: { displayName: 'Submitted' },
+    2: { displayName: 'Completed' }
+  }
 };
 
 class Task {
@@ -17,6 +30,7 @@ class Task {
     this.hunter = taskStruct[TASK_PROPERTY_TO_INDEX.hunter];
     this.reward = taskStruct[TASK_PROPERTY_TO_INDEX.reward].toNumber().toString();
     this.description = Web3Utils.toAscii(taskStruct[TASK_PROPERTY_TO_INDEX.description]);
+    this.status = TaskStatusEnum.properties[taskStruct[TASK_PROPERTY_TO_INDEX.status].toNumber()].displayName;
     this.createdAt = taskStruct[TASK_PROPERTY_TO_INDEX.createdAt].toNumber();
   }
 }
