@@ -8,25 +8,29 @@ import TextField from '@material-ui/core/TextField';
 import CustomButton from '../components/button/CustomButton';
 import DashboardTasksContainer from './DashboardTasksContainer';
 import Modal from '../components/modal/Modal';
+import ModalForm from '../components/modal/ModalForm';
+import Task from '../utils/Task';
 import getTasks from '../utils/getTasks';
+import watchEvent from '../utils/watchEvent';
 import './DashboardContainer.css';
 
 class DashboardContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      postedTasks: null,
-      postedTaskEvents: null,
+      myTasks: null,
+      myTaskEvents: null,
 
       addTaskModal: Map({ visible: false, title: '', reward: '', description: '' })
     }
   }
 
-  componentWillMount() {
-    let { bountyBuster, account } = this.props;
-    getTasks(bountyBuster, { poster: account })
-      .then((postedTasks) => {
-        this.setState({ postedTasks });
+  componentDidMount() {
+    let { bountyBuster, account, web3 } = this.props;
+    getTasks(bountyBuster, { poster: web3.eth.accounts[0] })
+      .then((myTasks) => {
+        this.setState({ myTasks });
+        watchEvent(bountyBuster, 'TaskAdded', this.watchTaskAdded.bind(this));
       });
   }
 
@@ -45,6 +49,20 @@ class DashboardContainer extends Component {
       });
   }
 
+  watchTaskAdded(error, event) {
+    let { taskHash } = event.args;
+    let { myTasks } = this.state;
+    let { bountyBuster } = this.props;
+    if (!myTasks.get(taskHash)) {
+      bountyBuster.tasks.call(taskHash).then((taskStruct) => {
+        let task = new Task(taskHash, taskStruct);
+        this.setState(({ myTasks }) => ({
+          myTasks: myTasks.update(taskHash, () => task)
+        }));
+      });
+    }
+  }
+
   handleAddTaskModalUpdate(property, value) {
     this.setState(({ addTaskModal }) => ({
       addTaskModal: addTaskModal.update(property, () => value)
@@ -57,32 +75,32 @@ class DashboardContainer extends Component {
         <div className='AddTask' >
           <CustomButton variant='fab' onClick={this.handleAddTaskModalUpdate.bind(this, 'visible', true)} iconName='add' />
         </div>
-        <p>My Posted Tasks</p>
-        <DashboardTasksContainer tasks={this.state.postedTasks} />
-        <p>Tasks for Submission</p>
+        <p>My Tasks</p>
+        <DashboardTasksContainer tasks={this.state.myTasks} />
+        <p>My Requests</p>
         <DashboardTasksContainer tasks={null} />
         {this.state.addTaskModal.get('visible') ?
           <Modal onClose={this.handleAddTaskModalUpdate.bind(this, 'visible', false)}>
-            <form className='AddTaskModalForm'>
+            <ModalForm>
               <TextField
                 label='Title'
                 required={true}
-                value={this.state.addTaskTitle}
+                value={this.state.addTaskModal.get('title')}
                 onChange={(e) => this.handleAddTaskModalUpdate('title', e.target.value)} />
               <TextField
                 label='Reward'
                 required={true}
-                value={this.state.addTaskReward}
+                value={this.state.addTaskModal.get('reward')}
                 onChange={(e) => this.handleAddTaskModalUpdate('reward', e.target.value)} />
               <TextField
                 label='Desciption'
                 multiline={true}
                 rows={5}
                 required={true}
-                value={this.state.addTaskDescription}
+                value={this.state.addTaskModal.get('description')}
                 onChange={(e) => this.handleAddTaskModalUpdate('description', e.target.value)} />
               <CustomButton value='Create' onClick={() => this.addTask()} />
-            </form>
+            </ModalForm>
           </Modal> : null}
       </div>
     );

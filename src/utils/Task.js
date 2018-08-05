@@ -13,12 +13,14 @@ const TASK_PROPERTY_TO_INDEX = {
 const TaskStatusEnum = {
   POSTED: 0,
   SUBMITTED: 1,
-  COMPLETED: 2,
+  APPROVED: 2,
+  REJECTED: 3,
 
   properties: {
     0: { displayName: 'Posted' },
     1: { displayName: 'Submitted' },
-    2: { displayName: 'Completed' }
+    2: { displayName: 'Approved' },
+    3: { displayName: 'Rejected' }
   }
 };
 

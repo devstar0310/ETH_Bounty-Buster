@@ -5,12 +5,22 @@ const Web3Utils = require('web3-utils');
 contract('BountyBuster', function(accounts) {
   const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
   const TASK_ADDED_EVENT = 'TaskAdded';
-  const TASK_PROPERTY_TO_INDEX = { title: 0, poster: 1, hunter: 2, reward: 3, description: 4, createdAt: 5 };
+  const TASK_REQUESTED_EVENT = 'TaskRequested';
+  const TASK_PROPERTY_TO_INDEX = {
+    title: 0,
+    poster: 1,
+    hunter: 2,
+    reward: 3,
+    description: 4,
+    status: 5,
+    createdAt: 6
+  };
   const taskTitle = 'Suh';
   const taskReward = '10';
   const taskDescription = 'This is a task description';
+  let testTaskHash;
 
-  it('should correctly emit a task added event with a task hash when a task is created', () => {
+  it('should correctly emit a task added event with a task hash and poster address when a task is created', () => {
     let bountyBusterInstance;
 
     return BountyBuster
@@ -23,7 +33,10 @@ contract('BountyBuster', function(accounts) {
         return watchEvent(bountyBusterInstance, TASK_ADDED_EVENT);
       })
       .then((taskAddedEvent) => {
-        let taskHash = taskAddedEvent.args.taskHash;
+        let { taskHash, poster } = taskAddedEvent.args;
+        testTaskHash = taskHash;
+        assert.ok(taskHash);
+        assert.equal(poster, accounts[0]);
         return bountyBusterInstance.tasks.call(taskHash);
       })
       .then((task) => {
@@ -47,4 +60,26 @@ contract('BountyBuster', function(accounts) {
         assert.equal(Web3Utils.fromWei(balance.toNumber().toString(), 'ether'), taskReward);
       });
   });
+
+  it('should correctly emit a task requested event with a request and task hash and requester address when a request is made', () => {
+    let bountyBusterInstance;
+    let message = 'This is completed work';
+
+    BountyBuster
+      .deployed()
+      .then((instance) => {
+        bountyBusterInstance = instance;
+        return bountyBusterInstance.submitRequest(testTaskHash, message, { from: accounts[0] });
+      })
+      .then(() => {
+        return watchEvent(bountyBusterInstance, TASK_REQUESTED_EVENT);
+      })
+      .then((taskRequestedEvent) => {
+        let { requestHash, taskHash, requester } = taskRequestedEvent.args;
+        assert.ok(requestHash);
+        assert.equal(taskHash, testTaskHash);
+        assert.equal(requester, accounts[0])
+      });
+  });
+
 });

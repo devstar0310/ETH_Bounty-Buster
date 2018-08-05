@@ -4,7 +4,8 @@ contract BountyBuster {
   enum TaskStatus {
     Posted,
     Submitted,
-    Completed
+    Approved,
+    Rejected
   }
 
   struct Task {
@@ -21,9 +22,21 @@ contract BountyBuster {
 
   event TaskAdded(bytes32 taskHash, address indexed poster);
 
+  struct Request {
+    address requester;
+    bytes32 taskHash;
+    bytes message;
+    uint created_at;
+  }
+
+  mapping(bytes32 => Request) public requests;
+
+  event TaskRequested(bytes32 requestHash, bytes32 taskHash, address indexed requester);
+
   function addTask(bytes _title, bytes _description)
   public
   payable
+  returns (bytes32)
   {
     uint _createdAt = block.timestamp;
     Task memory newTask = Task({
@@ -35,8 +48,24 @@ contract BountyBuster {
       status: TaskStatus.Posted,
       created_at: _createdAt
     });
-    bytes32 taskHash = keccak256(abi.encodePacked(newTask.poster, _title, msg.value, _description, _createdAt));
+    bytes32 taskHash = keccak256(abi.encodePacked(msg.sender, _title, msg.value, _description, _createdAt));
     tasks[taskHash] = newTask;
     emit TaskAdded(taskHash, msg.sender);
+    return taskHash;
+  }
+
+  function submitRequest(bytes32 _taskHash, bytes _message)
+  public
+  {
+    uint _createdAt = block.timestamp;
+    Request memory newRequest = Request({
+      requester: msg.sender,
+      taskHash: _taskHash,
+      message: _message,
+      created_at: _createdAt
+    });
+    bytes32 requestHash = keccak256(abi.encodePacked(msg.sender, _taskHash, _message, _createdAt));
+    requests[requestHash] = newRequest;
+    emit TaskRequested(requestHash, _taskHash, msg.sender);
   }
 }

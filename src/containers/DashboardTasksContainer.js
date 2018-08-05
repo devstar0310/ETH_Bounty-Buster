@@ -12,7 +12,7 @@ const DashboardTasksContainer = ({ tasks }) => {
   return (
     <div className='DashboardTasksContainer'>
       <PaperSection>
-        {tasks ? <Table>
+        {tasks && tasks.size > 0 ? <Table>
           <TableBody>
             {tasks.toArray().map((task) => {
               return (
@@ -24,7 +24,7 @@ const DashboardTasksContainer = ({ tasks }) => {
               );
             })}
           </TableBody>
-        </Table> : null}
+        </Table> : <p className='NoTasks'>No Results</p>}
       </PaperSection>
     </div>
   );

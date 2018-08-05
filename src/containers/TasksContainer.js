@@ -6,6 +6,7 @@ import withBountyBuster from '../providers/withBountyBuster';
 import TasksTableContainer from './TasksTableContainer';
 import getTasks from '../utils/getTasks';
 import Task from '../utils/Task';
+import watchEvent from '../utils/watchEvent';
 import './TasksContainer.css';
 
 class TasksContainer extends Component {
@@ -22,7 +23,7 @@ class TasksContainer extends Component {
     getTasks(bountyBuster)
       .then((tasks) => {
         this.setState({ tasks });
-        bountyBuster.TaskAdded().watch(this.addTaskWatch.bind(this));
+        watchEvent(bountyBuster, 'TaskAdded', this.addTaskWatch.bind(this));
       });
   }
 

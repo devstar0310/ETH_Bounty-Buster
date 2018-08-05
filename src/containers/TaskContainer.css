@@ -1,26 +1,9 @@
 .TaskTitle {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   border-bottom: 1px solid rgba(0,0,0,.2);
   padding-bottom: 15px;
-}
-
-.TaskData {
-  margin-top: 30px;
-}
-
-.TaskData > .TaskReward {
-  width: 40%;
-}
-
-.TaskData > .TaskPoster {
-  width: 60%;
-}
-
-.TaskData > .TaskDescription {
-  width: 100%;
-}
-
-.TaskData > div {
-  margin-bottom: 30px;
 }
 
 .TaskTitle > p {

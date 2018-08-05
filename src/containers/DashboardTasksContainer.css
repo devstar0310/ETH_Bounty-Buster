@@ -4,15 +4,13 @@
   position: fixed;
 }
 
-.AddTaskModalForm {
-  margin: 20px;
-}
-
-.AddTaskModalForm > * {
-  margin-bottom: 10px !important;
-  width: 100%;
-}
-
 .DashboardTasksContainer {
   padding: 10px 150px 10px 25px;
+}
+
+.NoTasks {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: #808080b8;
 }

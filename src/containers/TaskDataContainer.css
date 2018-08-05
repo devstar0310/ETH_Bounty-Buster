@@ -1,0 +1,19 @@
+.TaskData {
+  margin-top: 30px;
+}
+
+.TaskData > .TaskReward {
+  width: 40%;
+}
+
+.TaskData > .TaskPoster {
+  width: 60%;
+}
+
+.TaskData > .TaskDescription {
+  width: 100%;
+}
+
+.TaskData > div {
+  margin-bottom: 30px;
+}
