@@ -8,7 +8,7 @@ import Web3Utils from 'web3-utils';
 import PaperSection from '../components/paper-section/PaperSection';
 import './DashboardTasksContainer.css';
 
-const DashboardTasksContainer = ({ tasks }) => {
+const DashboardTasksContainer = ({ tasks, onClickTask }) => {
   return (
     <div className='DashboardTasksContainer'>
       <PaperSection>
@@ -16,7 +16,11 @@ const DashboardTasksContainer = ({ tasks }) => {
           <TableBody>
             {tasks.toArray().map((task) => {
               return (
-                <TableRow key={task.hash} hover={true}>
+                <TableRow
+                  className='DashboardTaskRow'
+                  key={task.hash}
+                  hover={true}
+                  onClick={() => onClickTask(task.hash)}>
                   <TableCell>{task.title}</TableCell>
                   <TableCell>{Web3Utils.fromWei(task.reward, 'ether')}</TableCell>
                   <TableCell>{task.status}</TableCell>
@@ -24,7 +28,7 @@ const DashboardTasksContainer = ({ tasks }) => {
               );
             })}
           </TableBody>
-        </Table> : <p className='NoTasks'>No Results</p>}
+        </Table> : <p className='NoTasks'>No Tasks</p>}
       </PaperSection>
     </div>
   );

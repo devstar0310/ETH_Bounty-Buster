@@ -7,24 +7,39 @@ import Modal from '../components/modal/Modal';
 import ModalForm from '../components/modal/ModalForm';
 import CustomButton from '../components/button/CustomButton';
 import TaskDataContainer from '../containers/TaskDataContainer';
+import DashboardRequestsContainer from '../containers/DashboardRequestsContainer';
 import './TaskContainer.css';
 
 import Task from '../utils/Task';
+import getRequests from '../utils/getRequests';
 import withBountyBuster from '../providers/withBountyBuster';
 import withWeb3 from '../providers/withWeb3';
 
 class TaskContainer extends Component {
   constructor(props) {
     super(props);
-    this.state = { task: null, applyForTaskModal: Map({ visible: false, message: '' }) };
+    this.state = {
+      task: null,
+      requests: null,
+
+      applyForTaskModal: Map({ visible: false, message: '' })
+    };
   }
   componentWillMount() {
-    let { bountyBuster, match } = this.props;
+    let { bountyBuster, match, web3 } = this.props;
     let { taskHash } = match.params;
     bountyBuster.tasks.call(taskHash)
       .then((taskStruct) => {
         let task = new Task(taskHash, taskStruct);
-        this.setState({ task: Map(task) });
+        this.setState({ task });
+        if (task.poster === web3.eth.accounts[0]) {
+          return getRequests(bountyBuster, { taskHash: task.hash })
+        }
+      })
+      .then((requests) => {
+        if (requests && requests.size > 0) {
+          this.setState({ requests });
+        }
       });
   }
 
@@ -37,7 +52,7 @@ class TaskContainer extends Component {
   submitTask() {
     let { task, applyForTaskModal } = this.state;
     let { account, bountyBuster } = this.props;
-    let taskHash = task.get('hash');
+    let taskHash = task.hash;
     let message = applyForTaskModal.get('message');
     bountyBuster.submitRequest(taskHash, message, { from: account })
       .then(() => {
@@ -45,25 +60,32 @@ class TaskContainer extends Component {
       });
   }
 
+  onClickRequest(requestHash) {
+    this.props.history.push(`/requests/${requestHash}`);
+  }
+
   render() {
-    let { task, applyForTaskModal } = this.state;
-    let { account } = this.props;
+    let { task, requests, applyForTaskModal } = this.state;
+    let { web3 } = this.props;
     return (
       <div>
         {task ?
           <div className='TaskContainer'>
             <div className='TaskTitle'>
-              <p>{task.get('title')}</p>
-              {account !== task.get('poster') ?
+              <p>{task.title}</p>
+              {web3.eth.accounts[0] !== task.poster ?
                 <CustomButton value='Apply' onClick={this.handleApplyForTaskModalUpdate.bind(this, 'visible', true)}>
                 </CustomButton> :
               null}
             </div>
             <TaskDataContainer
-              reward={task.get('reward')}
-              poster={task.get('poster')}
-              description={task.get('description')} />
+              reward={task.reward}
+              poster={task.poster}
+              description={task.description} />
           </div> :
+        null}
+        {requests && requests.size > 0 ?
+          <DashboardRequestsContainer requests={requests} onClickRequest={this.onClickRequest.bind(this)} /> :
         null}
         {applyForTaskModal.get('visible') ?
           <Modal onClose={this.handleApplyForTaskModalUpdate.bind(this, 'visible', false)}>

@@ -4,10 +4,8 @@ contract BountyBuster {
   enum TaskStatus {
     Posted,
     Submitted,
-    Approved,
-    Rejected
+    Completed
   }
-
   struct Task {
     bytes title;
     address poster;
@@ -17,21 +15,23 @@ contract BountyBuster {
     TaskStatus status;
     uint created_at;
   }
-
   mapping(bytes32 => Task) public tasks;
-
   event TaskAdded(bytes32 taskHash, address indexed poster);
 
+  enum RequestStatus {
+    Submitted,
+    Accepted,
+    Rejected
+  }
   struct Request {
     address requester;
     bytes32 taskHash;
     bytes message;
+    RequestStatus status;
     uint created_at;
   }
-
   mapping(bytes32 => Request) public requests;
-
-  event TaskRequested(bytes32 requestHash, bytes32 taskHash, address indexed requester);
+  event TaskRequested(bytes32 requestHash, bytes32 indexed taskHash, address indexed requester);
 
   function addTask(bytes _title, bytes _description)
   public
@@ -62,6 +62,7 @@ contract BountyBuster {
       requester: msg.sender,
       taskHash: _taskHash,
       message: _message,
+      status: RequestStatus.Submitted,
       created_at: _createdAt
     });
     bytes32 requestHash = keccak256(abi.encodePacked(msg.sender, _taskHash, _message, _createdAt));

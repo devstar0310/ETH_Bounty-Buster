@@ -7,6 +7,7 @@ import HomeContainer from './containers/HomeContainer';
 import DashboardContainer from './containers/DashboardContainer';
 import TasksContainer from './containers/TasksContainer';
 import TaskContainer from './containers/TaskContainer';
+import RequestContainer from './containers/RequestContainer';
 import Web3Provider from './providers/Web3Provider';
 import BountyBusterProvider from './providers/BountyBusterProvider';
 
@@ -30,6 +31,7 @@ class App extends Component {
                   <Route exact path='/dashboard' component={DashboardContainer} />
                   <Route exact path='/tasks' component={TasksContainer} />
                   <Route path='/tasks/:taskHash' component={TaskContainer} />
+                  <Route path='/requests/:requestHash' component={RequestContainer} />
                 </div>
               </div>
             </Router>

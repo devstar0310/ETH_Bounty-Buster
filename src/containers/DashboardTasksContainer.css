@@ -4,8 +4,8 @@
   position: fixed;
 }
 
-.DashboardTasksContainer {
-  padding: 10px 150px 10px 25px;
+.DashboardTaskRow {
+  cursor: pointer;
 }
 
 .NoTasks {

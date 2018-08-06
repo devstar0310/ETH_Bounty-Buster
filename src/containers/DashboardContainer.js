@@ -6,11 +6,14 @@ import { Map } from 'immutable';
 import TextField from '@material-ui/core/TextField';
 
 import CustomButton from '../components/button/CustomButton';
+import DashboardSection from '../components/dashboard/DashboardSection';
 import DashboardTasksContainer from './DashboardTasksContainer';
+import DashboardRequestsContainer from './DashboardRequestsContainer';
 import Modal from '../components/modal/Modal';
 import ModalForm from '../components/modal/ModalForm';
 import Task from '../utils/Task';
 import getTasks from '../utils/getTasks';
+import getRequests from '../utils/getRequests';
 import watchEvent from '../utils/watchEvent';
 import './DashboardContainer.css';
 
@@ -18,20 +21,23 @@ class DashboardContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      myTasks: null,
-      myTaskEvents: null,
+      tasks: null,
+      requests: null,
 
       addTaskModal: Map({ visible: false, title: '', reward: '', description: '' })
     }
   }
 
-  componentDidMount() {
-    let { bountyBuster, account, web3 } = this.props;
-    getTasks(bountyBuster, { poster: web3.eth.accounts[0] })
-      .then((myTasks) => {
-        this.setState({ myTasks });
-        watchEvent(bountyBuster, 'TaskAdded', this.watchTaskAdded.bind(this));
-      });
+  componentWillMount() {
+    let { bountyBuster, web3 } = this.props;
+    let account = web3.eth.accounts[0];
+    Promise.all([
+      getTasks(bountyBuster, { poster: account }),
+      getRequests(bountyBuster, { requester: account })
+    ]).then(([tasks, requests]) => {
+      this.setState({ tasks, requests });
+      watchEvent(bountyBuster, 'TaskAdded', this.watchTaskAdded.bind(this));
+    });
   }
 
   addTask() {
@@ -51,13 +57,13 @@ class DashboardContainer extends Component {
 
   watchTaskAdded(error, event) {
     let { taskHash } = event.args;
-    let { myTasks } = this.state;
+    let { tasks } = this.state;
     let { bountyBuster } = this.props;
-    if (!myTasks.get(taskHash)) {
+    if (!tasks.get(taskHash)) {
       bountyBuster.tasks.call(taskHash).then((taskStruct) => {
         let task = new Task(taskHash, taskStruct);
-        this.setState(({ myTasks }) => ({
-          myTasks: myTasks.update(taskHash, () => task)
+        this.setState(({ tasks }) => ({
+          tasks: tasks.update(taskHash, () => task)
         }));
       });
     }
@@ -69,16 +75,26 @@ class DashboardContainer extends Component {
     }));
   }
 
+  onClickTask(taskHash) {
+    this.props.history.push(`tasks/${taskHash}`);
+  }
+
+  onClickRequest(requestHash) {
+    this.props.history.push(`requests/${requestHash}`);
+  }
+
   render() {
     return (
       <div className='DashboardContainer'>
         <div className='AddTask' >
           <CustomButton variant='fab' onClick={this.handleAddTaskModalUpdate.bind(this, 'visible', true)} iconName='add' />
         </div>
-        <p>My Tasks</p>
-        <DashboardTasksContainer tasks={this.state.myTasks} />
-        <p>My Requests</p>
-        <DashboardTasksContainer tasks={null} />
+        <DashboardSection title='My Tasks'>
+          <DashboardTasksContainer tasks={this.state.tasks} onClickTask={this.onClickTask.bind(this)} />
+        </DashboardSection>
+        <DashboardSection title='My Requests'>
+          <DashboardRequestsContainer requests={this.state.requests} onClickRequest={this.onClickRequest.bind(this)} />
+        </DashboardSection>
         {this.state.addTaskModal.get('visible') ?
           <Modal onClose={this.handleAddTaskModalUpdate.bind(this, 'visible', false)}>
             <ModalForm>
