@@ -6,6 +6,7 @@ import TextField from '@material-ui/core/TextField';
 import Modal from '../components/modal/Modal';
 import ModalForm from '../components/modal/ModalForm';
 import CustomButton from '../components/button/CustomButton';
+import PageHeader from '../components/page-header/PageHeader';
 import TaskDataContainer from '../containers/TaskDataContainer';
 import DashboardRequestsContainer from '../containers/DashboardRequestsContainer';
 import './TaskContainer.css';
@@ -71,13 +72,11 @@ class TaskContainer extends Component {
       <div>
         {task ?
           <div className='TaskContainer'>
-            <div className='TaskTitle'>
-              <p>{task.title}</p>
-              {web3.eth.accounts[0] !== task.poster ?
-                <CustomButton value='Apply' onClick={this.handleApplyForTaskModalUpdate.bind(this, 'visible', true)}>
-                </CustomButton> :
-              null}
-            </div>
+            <PageHeader title={task.title} right={
+              web3.eth.accounts[0] !== task.poster ?
+              <CustomButton value='Apply' onClick={this.handleApplyForTaskModalUpdate.bind(this, 'visible', true)} />
+              : null}
+              />
             <TaskDataContainer
               reward={task.reward}
               poster={task.poster}

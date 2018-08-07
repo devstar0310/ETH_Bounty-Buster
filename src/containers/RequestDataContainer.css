@@ -1,0 +1,4 @@
+.RequestDataContainer {
+  display: flex;
+  flex-direction: column;
+}

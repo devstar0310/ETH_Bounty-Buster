@@ -1,0 +1,13 @@
+.PageHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid rgba(0,0,0,.2);
+  padding-bottom: 15px;
+  margin-bottom: 30px;
+}
+
+.PageHeaderTitle {
+  margin: 0;
+  font-size: 30px;
+}

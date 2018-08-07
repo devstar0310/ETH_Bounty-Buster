@@ -16,10 +16,10 @@ contract BountyBuster {
     uint created_at;
   }
   mapping(bytes32 => Task) public tasks;
-  event TaskAdded(bytes32 taskHash, address indexed poster);
+  event TaskAdded(bytes32 indexed taskHash, address indexed poster);
 
   enum RequestStatus {
-    Submitted,
+    Submitted, // Pending
     Accepted,
     Rejected
   }

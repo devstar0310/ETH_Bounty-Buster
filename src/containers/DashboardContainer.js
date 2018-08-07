@@ -56,10 +56,10 @@ class DashboardContainer extends Component {
   }
 
   watchTaskAdded(error, event) {
-    let { taskHash } = event.args;
+    let { taskHash, poster } = event.args;
     let { tasks } = this.state;
-    let { bountyBuster } = this.props;
-    if (!tasks.get(taskHash)) {
+    let { bountyBuster, web3 } = this.props;
+    if (!tasks.get(taskHash) && poster === web3.eth.accounts[0]) {
       bountyBuster.tasks.call(taskHash).then((taskStruct) => {
         let task = new Task(taskHash, taskStruct);
         this.setState(({ tasks }) => ({
