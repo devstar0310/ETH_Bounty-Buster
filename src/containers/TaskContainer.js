@@ -52,10 +52,10 @@ class TaskContainer extends Component {
 
   submitTask() {
     let { task, applyForTaskModal } = this.state;
-    let { account, bountyBuster } = this.props;
+    let { web3, bountyBuster } = this.props;
     let taskHash = task.hash;
     let message = applyForTaskModal.get('message');
-    bountyBuster.submitRequest(taskHash, message, { from: account })
+    bountyBuster.submitRequest(taskHash, message, { from: web3.eth.accounts[0] })
       .then(() => {
         this.handleApplyForTaskModalUpdate('visible', false);
       });

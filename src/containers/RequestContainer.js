@@ -32,11 +32,29 @@ class RequestContainer extends Component {
   }
 
   handleAcceptRequest() {
-    // debugger;
+    let { match, bountyBuster, web3 } = this.props;
+    let { requestHash } = match.params;
+    bountyBuster.acceptRequest(requestHash, { from: web3.eth.accounts[0] })
+      .then(() => {
+        return bountyBuster.requests.call(requestHash);
+      })
+      .then((requestStruct) => {
+        let request = new Request(requestHash, requestStruct);
+        this.setState({ request });
+      });
   }
 
   handleRejectRequest() {
-    // debugger;
+    let { match, bountyBuster, web3 } = this.props;
+    let { requestHash } = match.params;
+    bountyBuster.rejectRequest(requestHash, { from: web3.eth.accounts[0] })
+      .then(() => {
+        return bountyBuster.requests.call(requestHash);
+      })
+      .then((requestStruct) => {
+        let request = new Request(requestHash, requestStruct);
+        this.setState({ request });
+      });
   }
 
   render() {

@@ -3,7 +3,6 @@ pragma solidity ^0.4.18;
 contract BountyBuster {
   enum TaskStatus {
     Posted,
-    Submitted,
     Completed
   }
   struct Task {
@@ -19,7 +18,7 @@ contract BountyBuster {
   event TaskAdded(bytes32 indexed taskHash, address indexed poster);
 
   enum RequestStatus {
-    Submitted, // Pending
+    Pending,
     Accepted,
     Rejected
   }
@@ -62,11 +61,29 @@ contract BountyBuster {
       requester: msg.sender,
       taskHash: _taskHash,
       message: _message,
-      status: RequestStatus.Submitted,
+      status: RequestStatus.Pending,
       created_at: _createdAt
     });
     bytes32 requestHash = keccak256(abi.encodePacked(msg.sender, _taskHash, _message, _createdAt));
     requests[requestHash] = newRequest;
     emit TaskRequested(requestHash, _taskHash, msg.sender);
+  }
+
+  function acceptRequest(bytes32 _requestHash)
+  public
+  payable
+  {
+    Request storage request = requests[_requestHash];
+    Task storage task = tasks[request.taskHash];
+    request.requester.transfer(task.reward);
+    request.status = RequestStatus.Accepted;
+    task.status = TaskStatus.Completed;
+  }
+
+  function rejectRequest(bytes32 _requestHash)
+  public
+  {
+    Request storage request = requests[_requestHash];
+    request.status = RequestStatus.Rejected;
   }
 }

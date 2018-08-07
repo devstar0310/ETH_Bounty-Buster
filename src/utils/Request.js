@@ -9,12 +9,12 @@ const REQUEST_PROPERTY_TO_INDEX = {
 };
 
 const TaskStatusEnum = {
-  SUBMITTED: 0,
+  PENDING: 0,
   ACCEPTED: 1,
   REJECTED: 2,
 
   properties: {
-    0: { displayName: 'Submitted' },
+    0: { displayName: 'Pending' },
     1: { displayName: 'Accepted' },
     2: { displayName: 'Rejected' }
   }
