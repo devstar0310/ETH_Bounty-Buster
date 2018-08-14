@@ -22,7 +22,7 @@ const DashboardTasksContainer = ({ tasks, onClickTask }) => {
                   hover={true}
                   onClick={() => onClickTask(task.hash)}>
                   <TableCell>{task.title}</TableCell>
-                  <TableCell>{Web3Utils.fromWei(task.reward, 'ether')}</TableCell>
+                  <TableCell>{Web3Utils.fromWei(task.reward, 'ether')} Eth</TableCell>
                   <TableCell>{task.status}</TableCell>
                 </TableRow>
               );
