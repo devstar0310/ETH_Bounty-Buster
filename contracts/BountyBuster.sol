@@ -8,7 +8,6 @@ contract BountyBuster {
   struct Task {
     bytes title;
     address poster;
-    address hunter;
     uint reward;
     bytes description;
     TaskStatus status;
@@ -40,7 +39,6 @@ contract BountyBuster {
     uint _createdAt = block.timestamp;
     Task memory newTask = Task({
       poster: msg.sender,
-      hunter: 0,
       title: _title,
       reward: msg.value,
       description: _description,
@@ -52,15 +50,27 @@ contract BountyBuster {
     emit TaskAdded(taskHash, msg.sender);
   }
 
+  modifier taskMustExist(bytes32 _taskHash) {
+    Task memory task = tasks[_taskHash];
+    require(task.poster != address(0));
+    _;
+  }
+  modifier mustNotBePoster(bytes32 _taskHash) {
+    Task memory task = tasks[_taskHash];
+    require(task.poster != msg.sender);
+    _;
+  }
+
   /** @dev Submits request for a task.
     * @param _taskHash Hash of the task.
     * @param _message Message containing work for task.
     */
   function submitRequest(bytes32 _taskHash, bytes _message)
   public
+  mustNotBePoster(_taskHash)
+  taskMustExist(_taskHash)
   {
     Task memory task = tasks[_taskHash];
-    require(task.poster != msg.sender);
     uint _createdAt = block.timestamp;
     Request memory newRequest = Request({
       requester: msg.sender,
