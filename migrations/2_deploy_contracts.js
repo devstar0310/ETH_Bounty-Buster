@@ -1,5 +1,5 @@
-let BountyBuster = artifacts.require("./BountyBuster.sol");
+let BountyBuster = artifacts.require('./BountyBuster.sol');
 
-module.exports = function(deployer) {
+module.exports = (deployer) => {
   deployer.deploy(BountyBuster);
 };
