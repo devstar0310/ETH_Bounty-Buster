@@ -133,12 +133,20 @@ contract BountyBuster {
     request.status = RequestStatus.Rejected;
   }
 
+  modifier balanceMustBePositive() {
+    require(balances[msg.sender] > 0);
+    _;
+  }
+
   function cashOut()
   public
   payable
+  balanceMustBePositive()
   {
-    uint balance = balances[msg.sender];
-    msg.sender.transfer(balance);
+    address user = msg.sender;
+    uint balance = balances[user];
+    user.transfer(balance);
+    balances[user] = 0;
   }
 
   modifier mustBeOwner() {

@@ -4,6 +4,7 @@ import withBountyBuster from '../providers/withBountyBuster';
 import { compose } from 'recompose';
 import { Map } from 'immutable';
 import TextField from '@material-ui/core/TextField';
+import Web3Utils from 'web3-utils';
 
 import CustomButton from '../components/button/CustomButton';
 import DashboardSection from '../components/dashboard/DashboardSection';
@@ -32,10 +33,11 @@ class DashboardContainer extends Component {
     let { bountyBuster, web3 } = this.props;
     let account = web3.eth.accounts[0];
     Promise.all([
+      bountyBuster.balances.call(account),
       getTasks(bountyBuster, { poster: account }),
       getRequests(bountyBuster, { requester: account })
-    ]).then(([tasks, requests]) => {
-      this.setState({ tasks, requests });
+    ]).then(([balance, tasks, requests]) => {
+      this.setState({ balance, tasks, requests });
       watchEvent(bountyBuster, 'TaskAdded', this.watchTaskAdded.bind(this));
     });
   }
@@ -52,6 +54,18 @@ class DashboardContainer extends Component {
         this.handleAddTaskModalUpdate('title', '');
         this.handleAddTaskModalUpdate('reward', '');
         this.handleAddTaskModalUpdate('description', '');
+      });
+  }
+
+  cashOut() {
+    let { bountyBuster, web3 } = this.props;
+    bountyBuster.cashOut({ from: web3.eth.accounts[0] })
+      .then(() => {
+        bountyBuster.balances.call(web3.eth.accounts[0]);
+      })
+      .then((balance) => {
+        console.log('balance, ', balance.toNumber());
+        this.setState({ balance });
       });
   }
 
@@ -89,6 +103,12 @@ class DashboardContainer extends Component {
         <div className='AddTask' >
           <CustomButton variant='fab' onClick={this.handleAddTaskModalUpdate.bind(this, 'visible', true)} iconName='add' />
         </div>
+        <DashboardSection title='My Bounty Buster Balance'>
+          <div className='DashboardContainerBalance'>
+            <p>{this.state.balance ? Web3Utils.fromWei(this.state.balance.toString(), 'ether') + ' Eth' : 'Loading'}</p>
+            {this.state.balance && this.state.balance > 0 ? <CustomButton value='Cash Out' onClick={() => this.cashOut()} /> : null}
+          </div>
+        </DashboardSection>
         <DashboardSection title='My Tasks'>
           <DashboardTasksContainer tasks={this.state.tasks} onClickTask={this.onClickTask.bind(this)} />
         </DashboardSection>

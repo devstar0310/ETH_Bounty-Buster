@@ -1,1 +1,7 @@
+.DashboardContainerBalance {
+  display: flex;
+}
 
+.DashboardContainerBalance > * {
+  margin-right: 50px;
+}
