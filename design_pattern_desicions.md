@@ -23,3 +23,9 @@ For request submission, I ensure that the task exists and that the requester is
 not the poster. That would be a redundant operation. For accepting and rejecting
 requests, I ensure that the request exists and that the user accepting or
 rejecting is the task poster.
+
+### Emergency Stop
+For the emergency stop there is a bool `isStopped`. It is initialized to `false`.
+The owner is the only user who can pause or resume the contract. Each function
+checks to see whether the contract has been paused. If it has, the functions
+revert.

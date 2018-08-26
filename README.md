@@ -38,8 +38,5 @@ request is accepted, the assigned bounty is sent to the requester.
 14. Click on the first request.
 15. Click on the options on the top right. You can either accept or reject the task.
 16. Accepting the task add to the requesters balance.
-
-TODO:
-emergency stop
-function() at end of contract
-allow user to cash out
+17. Switch to second user account. Account balance should be the reward for the
+    task. You can cash out this account, by clicking the Cash Out button.
