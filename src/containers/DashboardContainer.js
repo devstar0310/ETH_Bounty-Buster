@@ -105,6 +105,7 @@ class DashboardContainer extends Component {
         </div>
         <DashboardSection title='My Bounty Buster Balance'>
           <div className='DashboardContainerBalance'>
+            <p>Account: {this.props.web3.eth.accounts[0]}</p>
             <p>{this.state.balance ? Web3Utils.fromWei(this.state.balance.toString(), 'ether') + ' Eth' : 'Loading'}</p>
             {this.state.balance && this.state.balance > 0 ? <CustomButton value='Cash Out' onClick={() => this.cashOut()} /> : null}
           </div>
