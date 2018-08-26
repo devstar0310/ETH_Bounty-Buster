@@ -4,19 +4,16 @@ const Web3Utils = require('web3-utils');
 const errorHandling = require('./helpers/error-handling');
 
 contract('BountyBuster', function(accounts) {
-  const ZERO_ADDRESS = '0x0000000000000000000000000000000000000000';
-
   const TASK_ADDED_EVENT = 'TaskAdded';
   const TASK_REQUESTED_EVENT = 'TaskRequested';
 
   const TASK_PROPERTY_TO_INDEX = {
     title: 0,
     poster: 1,
-    hunter: 2,
-    reward: 3,
-    description: 4,
-    status: 5,
-    createdAt: 6
+    reward: 2,
+    description: 3,
+    status: 4,
+    createdAt: 5
   };
 
   const REQUEST_PROPERTY_TO_INDEX = {
@@ -63,7 +60,6 @@ contract('BountyBuster', function(accounts) {
     let task = await bountyBusterInstance.tasks.call(testTaskHash);
     assert.equal(Web3Utils.hexToUtf8(task[TASK_PROPERTY_TO_INDEX.title]), taskTitle);
     assert.equal(task[TASK_PROPERTY_TO_INDEX.poster], accounts[0]);
-    assert.equal(task[TASK_PROPERTY_TO_INDEX.hunter], ZERO_ADDRESS);
     assert.equal(Web3Utils.fromWei(task[TASK_PROPERTY_TO_INDEX.reward].toNumber().toString(), 'ether'), taskReward);
     assert.equal(Web3Utils.hexToUtf8(task[TASK_PROPERTY_TO_INDEX.description]), taskDescription);
   });
@@ -149,5 +145,40 @@ contract('BountyBuster', function(accounts) {
 
     let task = await bountyBusterInstance.tasks.call(testTaskHash);
     assert.equal(task[TASK_PROPERTY_TO_INDEX.status], TASK_STATUS_ENUM.completed);
+  });
+
+  it('should allow a user to cash out', async () => {
+    let originalBalanceOfRequesterAddress = await web3.eth.getBalance(accounts[1]);
+    await bountyBusterInstance.cashOut({ from: accounts[1] });
+    let currentBalanceOfRequesterAddress = await web3.eth.getBalance(accounts[1]);
+    assert.ok(currentBalanceOfRequesterAddress > originalBalanceOfRequesterAddress);
+  });
+
+  it('should allow the owner to pause the contract', async () => {
+    await bountyBusterInstance.pause({ from: accounts[0] });
+    let isStopped = await bountyBusterInstance.isStopped.call();
+    assert.equal(isStopped, true);
+  });
+
+  it('should allow the owner to resume the contract', async () => {
+    await bountyBusterInstance.resume({ from: accounts[0] });
+    let isStopped = await bountyBusterInstance.isStopped.call();
+    assert.equal(isStopped, false);
+  });
+
+  it('should not allow a user that is not the owner to pause the contract', async () => {
+    try {
+      await bountyBusterInstance.pause({ from: accounts[1] });
+    } catch(err) {
+      assert.ok(errorHandling.isOfTypeRevert(err));
+    }
+  });
+
+  it('should not allow a user that is not the owner to resume the contract', async () => {
+    try {
+      await bountyBusterInstance.resume({ from: accounts[1] });
+    } catch(err) {
+      assert.ok(errorHandling.isOfTypeRevert(err));
+    }
   });
 });

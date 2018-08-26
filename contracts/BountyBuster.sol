@@ -2,6 +2,18 @@ pragma solidity ^0.4.18;
 
 /** @title Bounty Buster. */
 contract BountyBuster {
+  address owner;
+  bool public isStopped = false;
+
+  constructor() public {
+    owner = msg.sender;
+  }
+
+  modifier mustNotBeStopped() {
+    require(isStopped != true);
+    _;
+  }
+
   enum TaskStatus { Posted, Completed }
   enum RequestStatus { Pending, Accepted, Rejected }
 
@@ -35,6 +47,7 @@ contract BountyBuster {
   function addTask(bytes _title, bytes _description)
   public
   payable
+  mustNotBeStopped()
   {
     uint _createdAt = block.timestamp;
     Task memory newTask = Task({
@@ -67,10 +80,10 @@ contract BountyBuster {
     */
   function submitRequest(bytes32 _taskHash, bytes _message)
   public
+  mustNotBeStopped()
   mustNotBePoster(_taskHash)
   taskMustExist(_taskHash)
   {
-    Task memory task = tasks[_taskHash];
     uint _createdAt = block.timestamp;
     Request memory newRequest = Request({
       requester: msg.sender,
@@ -98,6 +111,7 @@ contract BountyBuster {
 
   function acceptRequest(bytes32 _requestHash)
   public
+  mustNotBeStopped()
   requestMustExist(_requestHash)
   mustBeTaskPoster(_requestHash)
   {
@@ -111,10 +125,45 @@ contract BountyBuster {
 
   function rejectRequest(bytes32 _requestHash)
   public
+  mustNotBeStopped()
   requestMustExist(_requestHash)
   mustBeTaskPoster(_requestHash)
   {
     Request storage request = requests[_requestHash];
     request.status = RequestStatus.Rejected;
+  }
+
+  function cashOut()
+  public
+  payable
+  {
+    uint balance = balances[msg.sender];
+    msg.sender.transfer(balance);
+  }
+
+  modifier mustBeOwner() {
+    require(msg.sender == owner);
+    _;
+  }
+
+  function pause()
+  public
+  mustBeOwner()
+  {
+    isStopped = true;
+  }
+
+  function resume()
+  public
+  mustBeOwner()
+  {
+    isStopped = false;
+  }
+
+  function()
+  public
+  payable
+  {
+    revert();
   }
 }
