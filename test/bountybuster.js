@@ -147,13 +147,6 @@ contract('BountyBuster', function(accounts) {
     assert.equal(task[TASK_PROPERTY_TO_INDEX.status], TASK_STATUS_ENUM.completed);
   });
 
-  it('should allow a user to cash out', async () => {
-    let originalBalanceOfRequesterAddress = await web3.eth.getBalance(accounts[1]);
-    await bountyBusterInstance.cashOut({ from: accounts[1] });
-    let currentBalanceOfRequesterAddress = await web3.eth.getBalance(accounts[1]);
-    assert.ok(currentBalanceOfRequesterAddress > originalBalanceOfRequesterAddress);
-  });
-
   it('should allow the owner to pause the contract', async () => {
     await bountyBusterInstance.pause({ from: accounts[0] });
     let isStopped = await bountyBusterInstance.isStopped.call();
