@@ -1,5 +1,9 @@
 pragma solidity ^0.4.18;
 
+/* This is a demo for how I would implement a library for Tasks. I didn't want
+to use this schema because I wanted to have the tasks mapping to be publicly
+available. */
+
 library TasksLibrary {
   enum TaskStatus { Posted, Completed }
 
