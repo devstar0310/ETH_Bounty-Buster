@@ -2,16 +2,15 @@ pragma solidity ^0.4.18;
 
 /** @title Bounty Buster. */
 contract BountyBuster {
+  // address of contract's owner
   address owner;
+
+  // boolean for emergency stop
   bool public isStopped = false;
 
+  // constructor sets owner to contract deployer
   constructor() public {
     owner = msg.sender;
-  }
-
-  modifier mustNotBeStopped() {
-    require(isStopped != true);
-    _;
   }
 
   enum TaskStatus { Posted, Completed }
@@ -33,17 +32,67 @@ contract BountyBuster {
     uint created_at;
   }
 
+  // task added event allows for filtering by taskHash or poster
   event TaskAdded(bytes32 indexed taskHash, address indexed poster);
+
+  // request added event allows for filtering by taskHash or requester
   event TaskRequested(bytes32 requestHash, bytes32 indexed taskHash, address indexed requester);
 
   mapping(bytes32 => Task) public tasks;
   mapping(bytes32 => Request) public requests;
   mapping(address => uint) public balances;
 
+  // modifier which makes sure that contract is not stopped
+  modifier mustNotBeStopped() {
+    require(isStopped != true);
+    _;
+  }
+
+  // modifier which makes sure task exists
+  modifier taskMustExist(bytes32 _taskHash) {
+    Task memory task = tasks[_taskHash];
+    require(task.poster != address(0));
+    _;
+  }
+
+  // modifier which makes sure user is not poster of the task
+  modifier mustNotBePoster(bytes32 _taskHash) {
+    Task memory task = tasks[_taskHash];
+    require(task.poster != msg.sender);
+    _;
+  }
+
+  // modifier which makes sure request exists
+  modifier requestMustExist(bytes32 _requestHash) {
+    Request memory request = requests[_requestHash];
+    require(request.requester != address(0));
+    _;
+  }
+
+  // modifier which makes sure user is poster of the task
+  modifier mustBeTaskPoster(bytes32 _requestHash) {
+    Request memory request = requests[_requestHash];
+    Task memory task = tasks[request.taskHash];
+    require(task.poster == msg.sender);
+    _;
+  }
+
+  // modifier which makes sure user's balance is greater than 0
+  modifier balanceMustBeGreaterThanZero() {
+    require(balances[msg.sender] > 0);
+    _;
+  }
+
+  // modifier which makes sure user is owner
+  modifier mustBeOwner() {
+    require(msg.sender == owner);
+    _;
+  }
+
   /** @dev Adds task.
-    * @param _title Title of the task.
-    * @param _description Description of the task.
-    */
+  * @param _title Title of the task.
+  * @param _description Description of the task.
+  */
   function addTask(bytes _title, bytes _description)
   public
   payable
@@ -57,22 +106,11 @@ contract BountyBuster {
       description: _description,
       status: TaskStatus.Posted,
       created_at: _createdAt
-    });
-    bytes32 taskHash = keccak256(abi.encodePacked(msg.sender, _title, msg.value, _description, _createdAt));
-    tasks[taskHash] = newTask;
-    emit TaskAdded(taskHash, msg.sender);
-  }
-
-  modifier taskMustExist(bytes32 _taskHash) {
-    Task memory task = tasks[_taskHash];
-    require(task.poster != address(0));
-    _;
-  }
-  modifier mustNotBePoster(bytes32 _taskHash) {
-    Task memory task = tasks[_taskHash];
-    require(task.poster != msg.sender);
-    _;
-  }
+      });
+      bytes32 taskHash = keccak256(abi.encodePacked(msg.sender, _title, msg.value, _description, _createdAt));
+      tasks[taskHash] = newTask;
+      emit TaskAdded(taskHash, msg.sender);
+    }
 
   /** @dev Submits request for a task.
     * @param _taskHash Hash of the task.
@@ -97,18 +135,9 @@ contract BountyBuster {
     emit TaskRequested(requestHash, _taskHash, msg.sender);
   }
 
-  modifier requestMustExist(bytes32 _requestHash) {
-    Request memory request = requests[_requestHash];
-    require(request.requester != address(0));
-    _;
-  }
-  modifier mustBeTaskPoster(bytes32 _requestHash) {
-    Request memory request = requests[_requestHash];
-    Task memory task = tasks[request.taskHash];
-    require(task.poster == msg.sender);
-    _;
-  }
-
+  /** @dev Accepts request.
+  * @param _requestHash Hash of the request.
+  */
   function acceptRequest(bytes32 _requestHash)
   public
   mustNotBeStopped()
@@ -123,6 +152,9 @@ contract BountyBuster {
     task.status = TaskStatus.Completed;
   }
 
+  /** @dev Rejects request.
+  * @param _requestHash Hash of the request.
+  */
   function rejectRequest(bytes32 _requestHash)
   public
   mustNotBeStopped()
@@ -133,15 +165,11 @@ contract BountyBuster {
     request.status = RequestStatus.Rejected;
   }
 
-  modifier balanceMustBePositive() {
-    require(balances[msg.sender] > 0);
-    _;
-  }
-
+  // @dev Cashes out user
   function cashOut()
   public
   payable
-  balanceMustBePositive()
+  balanceMustBeGreaterThanZero()
   {
     address user = msg.sender;
     uint balance = balances[user];
@@ -149,11 +177,7 @@ contract BountyBuster {
     balances[user] = 0;
   }
 
-  modifier mustBeOwner() {
-    require(msg.sender == owner);
-    _;
-  }
-
+  // @dev Pauses contract
   function pause()
   public
   mustBeOwner()
@@ -161,6 +185,7 @@ contract BountyBuster {
     isStopped = true;
   }
 
+  // @dev Resumes contract
   function resume()
   public
   mustBeOwner()
@@ -168,6 +193,7 @@ contract BountyBuster {
     isStopped = false;
   }
 
+  // @dev fallback function
   function()
   public
   payable

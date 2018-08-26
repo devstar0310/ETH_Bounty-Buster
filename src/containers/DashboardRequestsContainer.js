@@ -3,7 +3,6 @@ import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
 import TableRow from '@material-ui/core/TableRow';
 import TableCell from '@material-ui/core/TableCell';
-import Web3Utils from 'web3-utils';
 
 import PaperSection from '../components/paper-section/PaperSection';
 import './DashboardRequestsContainer.css';
